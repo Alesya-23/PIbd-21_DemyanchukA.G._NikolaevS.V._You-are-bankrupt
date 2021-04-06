@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AbstractInstallationSoftBusinessLogic.HelperModels
+namespace YouBankruptBusinessLogic.HelperModels
 {
     public class ExcelCellParameters
     {

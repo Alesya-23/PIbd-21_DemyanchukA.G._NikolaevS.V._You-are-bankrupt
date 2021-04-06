@@ -1,10 +1,8 @@
-﻿using AbstractInstallationSoftBusinessLogic.BindingModels;
-using AbstractInstallationSoftBusinessLogic.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AbstractInstallationSoftBusinessLogic.Interfaces
+namespace YouBankruptBusinessLogic.Interfaces
 {
     public interface IClientStorage
     {

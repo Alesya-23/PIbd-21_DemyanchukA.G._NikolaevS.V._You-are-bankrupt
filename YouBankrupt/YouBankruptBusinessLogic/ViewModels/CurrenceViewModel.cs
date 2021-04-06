@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Runtime.Serialization;
+using System.ComponentModel;
+
+namespace YouBankruptBusinessLogic.ViewModels
+{
+    class CurrenceViewModel
+    {
+        public int Id { get; set; }
+
+        [DisplayName("Название валюты")]    
+        public string Name { get; set; }
+
+        [DisplayName("Курс валюты")]
+        public string Rate { get; set; }
+    }
+}

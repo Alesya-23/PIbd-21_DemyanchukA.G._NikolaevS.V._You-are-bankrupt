@@ -1,13 +1,13 @@
-﻿using AbstractInstallationSoftBusinessLogic.BindingModels;
-using AbstractInstallationSoftBusinessLogic.HelperModels;
-using AbstractInstallationSoftBusinessLogic.Interfaces;
-using AbstractInstallationSoftBusinessLogic.ViewModels;
+﻿using YouBankruptBusinessLogic.BindingModels;
+using YouBankruptBusinessLogic.HelperModels;
+using YouBankruptBusinessLogic.Interfaces;
+using YouBankruptBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AbstractInstallationSoftBusinessLogic.BusinessLogics
+namespace YouBankruptBusinessLogic.BusinessLogics
 {
     public class ReportLogic
     {

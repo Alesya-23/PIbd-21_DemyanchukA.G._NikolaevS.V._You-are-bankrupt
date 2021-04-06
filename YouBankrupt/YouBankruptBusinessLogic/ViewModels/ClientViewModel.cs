@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AbstractInstallationSoftBusinessLogic.ViewModels
+namespace YouBankruptBusinessLogic.ViewModels
 {
     [DataContract]
     public class ClientViewModel

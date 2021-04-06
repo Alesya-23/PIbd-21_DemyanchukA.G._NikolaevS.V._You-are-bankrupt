@@ -1,11 +1,11 @@
-﻿using AbstractInstallationSoftBusinessLogic.BindingModels;
-using AbstractInstallationSoftBusinessLogic.Interfaces;
-using AbstractInstallationSoftBusinessLogic.ViewModels;
+﻿using YouBankruptBusinessLogic.BindingModels;
+using YouBankruptBusinessLogic.Interfaces;
+using YouBankruptBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AbstractInstallationSoftBusinessLogic.BusinessLogics
+namespace YouBankruptBusinessLogic.BusinessLogics
 {
     public class ClientLogic
     {

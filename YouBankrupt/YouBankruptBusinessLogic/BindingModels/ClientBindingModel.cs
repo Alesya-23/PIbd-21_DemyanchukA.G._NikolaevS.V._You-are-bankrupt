@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace AbstractInstallationSoftBusinessLogic.BindingModels
+namespace YouBankruptBusinessLogic.BindingModels
 {
     [DataContract]
     public class ClientBindingModel

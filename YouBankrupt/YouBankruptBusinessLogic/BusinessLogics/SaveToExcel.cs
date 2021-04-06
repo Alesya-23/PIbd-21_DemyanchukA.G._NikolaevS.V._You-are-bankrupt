@@ -1,4 +1,4 @@
-﻿using AbstractInstallationSoftBusinessLogic.HelperModels;
+﻿using YouBankruptBusinessLogic.HelperModels;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Office2010.Excel;
 using DocumentFormat.OpenXml.Office2013.Excel;
@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AbstractInstallationSoftBusinessLogic.BusinessLogics
+namespace YouBankruptBusinessLogic.BusinessLogics
 {
     public static class SaveToExcel
     {

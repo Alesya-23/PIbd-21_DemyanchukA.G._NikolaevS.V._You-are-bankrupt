@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AbstractInstallationSoftBusinessLogic.BindingModels
+namespace YouBankruptBusinessLogic.BindingModels
 {
     /// <summary>
     /// Данные для смены статуса заказа
