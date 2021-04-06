@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31105.61
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YouBankruptBusinessLogic", "YouBankruptBusinessLogic\YouBankruptBusinessLogic.csproj", "{84FBE8DF-2FF8-4055-89E1-B9CEE2D2335A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YouBankruptSupplierView", "..\YouBankruptSupplierView\YouBankruptSupplierView.csproj", "{D8AD6B26-954B-4F60-AACD-0FDB927DED68}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{84FBE8DF-2FF8-4055-89E1-B9CEE2D2335A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84FBE8DF-2FF8-4055-89E1-B9CEE2D2335A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84FBE8DF-2FF8-4055-89E1-B9CEE2D2335A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84FBE8DF-2FF8-4055-89E1-B9CEE2D2335A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8AD6B26-954B-4F60-AACD-0FDB927DED68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8AD6B26-954B-4F60-AACD-0FDB927DED68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8AD6B26-954B-4F60-AACD-0FDB927DED68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8AD6B26-954B-4F60-AACD-0FDB927DED68}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B22EED21-70DD-49D0-8E56-B34F29CCA5D0}
+	EndGlobalSection
+EndGlobal
