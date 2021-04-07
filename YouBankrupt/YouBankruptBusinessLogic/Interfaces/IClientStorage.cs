@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using YouBankruptBusinessLogic.BindingModels;
+using YouBankruptBusinessLogic.ViewModels;
 
 namespace YouBankruptBusinessLogic.Interfaces
 {
