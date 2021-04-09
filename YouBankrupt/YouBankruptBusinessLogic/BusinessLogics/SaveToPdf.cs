@@ -37,12 +37,12 @@ namespace YouBankruptBusinessLogic.BusinessLogics
                 Style = "NormalTitle",
                 ParagraphAlignment = ParagraphAlignment.Center
             });
-            foreach (var order in info.Orders)
+            foreach (var order in info.PurchasesCurreces)
             {
                 CreateRow(new PdfRowParameters
                 {
                     Table = table,
-                    Texts = new List<string> { order.DateCreate.ToShortDateString(), order.PackageName, order.Count.ToString(), order.Sum.ToString(), order.Status.ToString() },
+               //     Texts = new List<string> { order.DateCreate.ToShortDateString(), order.CurrenceName, order.Count.ToString(), order..ToString(), order.Status.ToString() },
                     Style = "Normal",
                     ParagraphAlignment = ParagraphAlignment.Left
                 });

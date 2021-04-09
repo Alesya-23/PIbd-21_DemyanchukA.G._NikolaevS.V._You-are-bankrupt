@@ -72,32 +72,32 @@ namespace YouBankruptBusinessLogic.BusinessLogics
                         ShareStringPart = shareStringPart,
                         ColumnName = "A",
                         RowIndex = rowIndex,
-                        Text = pc.PackageName,
+                      //  Text = pc.PackageName,
                         StyleIndex = 0U
                     });
                     rowIndex++;
-                    foreach (var package in pc.Components)
-                    {
-                        InsertCellInWorksheet(new ExcelCellParameters
-                        {
-                            Worksheet = worksheetPart.Worksheet,
-                            ShareStringPart = shareStringPart,
-                            ColumnName = "B",
-                            RowIndex = rowIndex,
-                            Text = package.Item1,
-                            StyleIndex = 1U
-                        });
-                        InsertCellInWorksheet(new ExcelCellParameters
-                        {
-                            Worksheet = worksheetPart.Worksheet,
-                            ShareStringPart = shareStringPart,
-                            ColumnName = "C",
-                            RowIndex = rowIndex,
-                            Text = package.Item2.ToString(),
-                            StyleIndex = 1U
-                        });
-                        rowIndex++;
-                    }
+                    //foreach (var package in pc.Components)
+                    //{
+                    //    InsertCellInWorksheet(new ExcelCellParameters
+                    //    {
+                    //        Worksheet = worksheetPart.Worksheet,
+                    //        ShareStringPart = shareStringPart,
+                    //        ColumnName = "B",
+                    //        RowIndex = rowIndex,
+                    //        Text = package.Item1,
+                    //        StyleIndex = 1U
+                    //    });
+                    //    InsertCellInWorksheet(new ExcelCellParameters
+                    //    {
+                    //        Worksheet = worksheetPart.Worksheet,
+                    //        ShareStringPart = shareStringPart,
+                    //        ColumnName = "C",
+                    //        RowIndex = rowIndex,
+                    //        Text = package.Item2.ToString(),
+                    //        StyleIndex = 1U
+                    //    });
+                    //    rowIndex++;
+                    //}
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
                         Worksheet = worksheetPart.Worksheet,

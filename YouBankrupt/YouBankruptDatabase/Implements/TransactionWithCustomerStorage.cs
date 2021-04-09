@@ -6,9 +6,9 @@ using System.Text;
 using YouBankruptBusinessLogic.BindingModels;
 using YouBankruptBusinessLogic.Interfaces;
 using YouBankruptBusinessLogic.ViewModels;
-using YouBankruptDatabaseImplement.Models;
+using YouBankruptDatabaseImplements.Models;
 
-namespace YouBankruptDatabaseImplement.Implements
+namespace YouBankruptDatabaseImplements.Implements
 {
     public class TransactionWithCustomerStorage : ITransactionWithCustomerStorage
     {

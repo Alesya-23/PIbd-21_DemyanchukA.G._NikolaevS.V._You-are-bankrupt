@@ -4,6 +4,7 @@ using System.Linq;
 using YouBankruptBusinessLogic.BindingModels;
 using YouBankruptBusinessLogic.Interfaces;
 using YouBankruptDatabaseImplement.Models;
+using YouBankruptDatabaseImplements;
 
 namespace YouBankruptDatabaseImplement.Implements
 {
