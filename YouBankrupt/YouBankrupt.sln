@@ -3,14 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YouBankruptSupplierView", "..\YouBankruptSupplierView\YouBankruptSupplierView.csproj", "{D8AD6B26-954B-4F60-AACD-0FDB927DED68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouBankruptBusinessLogic", "YouBankruptBusinessLogic\YouBankruptBusinessLogic.csproj", "{737928FC-C10A-46DA-A303-65578735EF86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YouBankruptProviderView", "YouBankruptProviderView\YouBankruptProviderView.csproj", "{88D65BE6-00D4-4ACB-B537-6EA8A4977F71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouBankruptCustomerView", "YouBankruptProviderView\YouBankruptCustomerView.csproj", "{9D08AB7E-23BC-45F5-94F7-BBDFF018532B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouBankruptDatabaseImplement", "YouBankruptDatabase\YouBankruptDatabaseImplement.csproj", "{585EC5C7-D133-40BB-AC53-BC4C310C28B8}"
 	ProjectSection(ProjectDependencies) = postProject
 		{737928FC-C10A-46DA-A303-65578735EF86} = {737928FC-C10A-46DA-A303-65578735EF86}
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YouBankruptBusinessLogic", "YouBankruptBusinessLogic\YouBankruptBusinessLogic.csproj", "{737928FC-C10A-46DA-A303-65578735EF86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,18 +18,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D8AD6B26-954B-4F60-AACD-0FDB927DED68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D8AD6B26-954B-4F60-AACD-0FDB927DED68}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D8AD6B26-954B-4F60-AACD-0FDB927DED68}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D8AD6B26-954B-4F60-AACD-0FDB927DED68}.Release|Any CPU.Build.0 = Release|Any CPU
-		{88D65BE6-00D4-4ACB-B537-6EA8A4977F71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{88D65BE6-00D4-4ACB-B537-6EA8A4977F71}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{88D65BE6-00D4-4ACB-B537-6EA8A4977F71}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{88D65BE6-00D4-4ACB-B537-6EA8A4977F71}.Release|Any CPU.Build.0 = Release|Any CPU
 		{737928FC-C10A-46DA-A303-65578735EF86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{737928FC-C10A-46DA-A303-65578735EF86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{737928FC-C10A-46DA-A303-65578735EF86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{737928FC-C10A-46DA-A303-65578735EF86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D08AB7E-23BC-45F5-94F7-BBDFF018532B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D08AB7E-23BC-45F5-94F7-BBDFF018532B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D08AB7E-23BC-45F5-94F7-BBDFF018532B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D08AB7E-23BC-45F5-94F7-BBDFF018532B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{585EC5C7-D133-40BB-AC53-BC4C310C28B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{585EC5C7-D133-40BB-AC53-BC4C310C28B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{585EC5C7-D133-40BB-AC53-BC4C310C28B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{585EC5C7-D133-40BB-AC53-BC4C310C28B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
