@@ -14,6 +14,7 @@ namespace YouBankruptBusinessLogic.BusinessLogics
 {
     public static class SaveToExcel
     {
+        /*
         public static void CreateDoc(ExcelInfo info)
         {
             using (SpreadsheetDocument spreadsheetDocument =
@@ -401,5 +402,7 @@ namespace YouBankruptBusinessLogic.BusinessLogics
             };
             mergeCells.Append(mergeCell);
         }
+
+        */
     }
 }
