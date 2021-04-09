@@ -1,0 +1,21 @@
+﻿<Window x:Class="YouBankruptSupplierView.CreditPrograms"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YouBankruptSupplierView"
+        mc:Ignorable="d"
+        Title="Кредитные программы" Height="456" Width="751">
+    <Grid Margin="0,0,39,35">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="dataGridListCreditPrograms" Margin="4,1,146,-5"/>
+        <Button x:Name="AddButton" Content="Добавить" HorizontalAlignment="Left" Margin="601,21,0,0" VerticalAlignment="Top" Height="44" Width="103" Click="AddButton_Click"/>
+        <Button x:Name="ChangeButton" Content="Изменить" HorizontalAlignment="Left" Margin="600,96,0,0" VerticalAlignment="Top" Height="44" Width="103"/>
+        <Button x:Name="DeleteButton" Content="Удалить" HorizontalAlignment="Left" Margin="600,170,0,0" VerticalAlignment="Top" Height="44" Width="103"/>
+        <Button x:Name="UpdateButton" Content="Обновить" HorizontalAlignment="Left" Margin="599,246,0,0" VerticalAlignment="Top" Height="44" Width="103"/>
+
+    </Grid>
+</Window>

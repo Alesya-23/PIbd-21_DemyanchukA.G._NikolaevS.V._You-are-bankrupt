@@ -4,11 +4,11 @@ using System.Text;
 
 namespace YouBankruptBusinessLogic.BindingModels
 {
-    class CurrenceBindingModel
+    public class CurrenceBindingModel
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
-        public string Name { get; set; }
+        public string CurrenceName { get; set; }
 
         public string Rate { get; set; }
     }

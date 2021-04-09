@@ -4,12 +4,16 @@ using System.Text;
 
 namespace YouBankruptBusinessLogic.BindingModels
 {
-    class PurchasesCurrenceBindingModel
+    public class PurchasesCurrenceBindingModel
     {
-//        ID закупки
-//Дата закупки
-//ID закупаемой валюты
-//Количество закупаемой валюты
+        public int? Id { get; set; }
 
+        public string PurchasesName { get; set;}
+ 
+        public DateTime DateBuy { get; set; }
+
+        public double Summ { get; set; }
+            
+        public Dictionary<int, (string, int)> Currenses { get; set; }
     }
 }
