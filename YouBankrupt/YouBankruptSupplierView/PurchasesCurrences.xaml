@@ -13,9 +13,9 @@
         </Grid.ColumnDefinitions>
         <DataGrid x:Name="dataGridListPurchasesCurrunce" Margin="0,0,163,29"/>
         <Button x:Name="AddButton" Content="Добавить" HorizontalAlignment="Left" Margin="584,20,0,0" VerticalAlignment="Top" Height="44" Width="103" Click="ButtonAddCurrence_Click"/>
-        <Button x:Name="ChangeButton" Content="Изменить" HorizontalAlignment="Left" Margin="583,95,0,0" VerticalAlignment="Top" Height="44" Width="103"/>
-        <Button x:Name="DeleteButton" Content="Удалить" HorizontalAlignment="Left" Margin="583,169,0,0" VerticalAlignment="Top" Height="44" Width="103"/>
-        <Button x:Name="UpdateButton" Content="Обновить" HorizontalAlignment="Left" Margin="582,245,0,0" VerticalAlignment="Top" Height="44" Width="103"/>
+        <Button x:Name="ChangeButton" Content="Изменить" HorizontalAlignment="Left" Margin="583,95,0,0" VerticalAlignment="Top" Height="44" Width="103" Click="ChangeButton_Click"/>
+        <Button x:Name="DeleteButton" Content="Удалить" HorizontalAlignment="Left" Margin="583,169,0,0" VerticalAlignment="Top" Height="44" Width="103" Click="DeleteButton_Click"/>
+        <Button x:Name="UpdateButton" Content="Обновить" HorizontalAlignment="Left" Margin="582,245,0,0" VerticalAlignment="Top" Height="44" Width="103" Click="UpdateButton_Click"/>
 
     </Grid>
 </Window>

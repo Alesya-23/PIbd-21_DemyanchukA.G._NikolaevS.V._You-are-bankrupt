@@ -30,5 +30,20 @@ namespace YouBankruptSupplierView
             PurchasesCurrence form = Container.Resolve<PurchasesCurrence>();
             form.Show();
         }
+
+        private void ChangeButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

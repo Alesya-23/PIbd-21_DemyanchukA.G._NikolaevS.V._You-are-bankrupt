@@ -13,23 +13,13 @@ using System.Windows.Shapes;
 namespace YouBankruptSupplierView
 {
     /// <summary>
-    /// Логика взаимодействия для CurrencePurcharesCurrences.xaml
+    /// Логика взаимодействия для ReportPurhacesCurrenceCriditing.xaml
     /// </summary>
-    public partial class CurrencePurcharesCurrences : Window
+    public partial class ReportPurhacesCurrenceCriditing : Window
     {
-        public CurrencePurcharesCurrences()
+        public ReportPurhacesCurrenceCriditing()
         {
             InitializeComponent();
-        }
-
-        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ButtonSave_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

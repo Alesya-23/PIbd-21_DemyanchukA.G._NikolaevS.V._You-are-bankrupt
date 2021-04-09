@@ -37,16 +37,16 @@ namespace YouBankruptBusinessLogic.BusinessLogics
                 Style = "NormalTitle",
                 ParagraphAlignment = ParagraphAlignment.Center
             });
-            foreach (var order in info.Orders)
-            {
-                CreateRow(new PdfRowParameters
-                {
-                    Table = table,
-                    Texts = new List<string> { order.DateCreate.ToShortDateString(), order.PackageName, order.Count.ToString(), order.Sum.ToString(), order.Status.ToString() },
-                    Style = "Normal",
-                    ParagraphAlignment = ParagraphAlignment.Left
-                });
-            }
+            //foreach (var order in info.Orders)
+            //{
+            //    CreateRow(new PdfRowParameters
+            //    {
+            //        Table = table,
+            //        Texts = new List<string> { order.DateCreate.ToShortDateString(), order.PackageName, order.Count.ToString(), order.Sum.ToString(), order.Status.ToString() },
+            //        Style = "Normal",
+            //        ParagraphAlignment = ParagraphAlignment.Left
+            //    });
+            //}
             PdfDocumentRenderer renderer = new PdfDocumentRenderer(true, PdfSharp.Pdf.PdfFontEmbedding.Always) { Document = document };
             renderer.RenderDocument();
             renderer.PdfDocument.Save(info.FileName);

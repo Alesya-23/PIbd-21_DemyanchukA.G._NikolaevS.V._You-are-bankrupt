@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using YouBankruptDatabaseImplements.Models;
+using YouBankruptDatabaseImplements.Models;
 
 namespace YouBankruptDatabaseImplements
 {
@@ -22,5 +23,10 @@ namespace YouBankruptDatabaseImplements
         public virtual DbSet<Supplier> Suppliers { set; get; }
         public virtual DbSet<CreditProgramCurrence> CreditProgramCurrences { set; get; }
         public virtual DbSet<PurchasesCurrenceCurrence> PurchasesCurrenceCurrences { set; get; }
+        public virtual DbSet<Crediting> Creditings { set; get; }
+
+        public virtual DbSet<Payment> Payments { set; get; }
+
+        public virtual DbSet<TransactionWithCustomer> TransactionWithCustomers { set; get; }
     }
 }

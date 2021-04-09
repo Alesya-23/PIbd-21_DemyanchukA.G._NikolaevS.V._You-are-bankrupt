@@ -25,7 +25,7 @@ namespace YouBankruptBusinessLogic.BusinessLogics
 
         public List<ReportPurhacesCurrenseByTransactionViewModel> GetPurhacesPayment(ReportPurhacesCurrenseByTransactionBindingModel model)
         {
-
+            return null;
         }
 
         public void SaveToPdfFile(ReportPurhacesCurrenseByTransactionBindingModel model)
