@@ -13,7 +13,7 @@ namespace YouBankruptBusinessLogic.BusinessLogics
     {
         public static void CreateDoc(PdfInfoSupplier info)
         {
-            Document document = new Document();
+            /* Document document = new Document();
             DefineStyles(document);
             Section section = document.AddSection();
             Paragraph paragraph = section.AddParagraph(info.Title);
@@ -50,6 +50,7 @@ namespace YouBankruptBusinessLogic.BusinessLogics
             PdfDocumentRenderer renderer = new PdfDocumentRenderer(true, PdfSharp.Pdf.PdfFontEmbedding.Always) { Document = document };
             renderer.RenderDocument();
             renderer.PdfDocument.Save(info.FileName);
+            */
         }
         /// <summary>
         /// Создание стилей для документа
