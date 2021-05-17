@@ -7,6 +7,7 @@ using YouBankruptBusinessLogic.BindingModels;
 using YouBankruptBusinessLogic.Interfaces;
 using YouBankruptBusinessLogic.ViewModels;
 using YouBankruptDatabaseImplement.Models;
+using YouBankruptDatabaseImplements;
 
 namespace YouBankruptDatabaseImplement.Implements
 {

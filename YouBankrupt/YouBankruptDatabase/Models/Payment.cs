@@ -16,7 +16,7 @@ namespace YouBankruptDatabaseImplement.Models
         [Required]
         public DateTime? DatePayment { get; set; }
 
-        [ForeignKey("TransactionWithClientId")]
-        public int? TransactionWithCustomerId { get; set; }
+        [ForeignKey("CustomerId")]
+        public int? CustomerId { get; set; }
     }
 }
