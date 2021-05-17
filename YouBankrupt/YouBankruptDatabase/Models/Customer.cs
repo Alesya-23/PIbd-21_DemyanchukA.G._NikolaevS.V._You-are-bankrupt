@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 using YouBankruptDatabaseImplement.Models;
 
 namespace YouBankruptDatabaseImplements.Models
@@ -20,13 +19,13 @@ namespace YouBankruptDatabaseImplements.Models
         [Required]
         public string Password { get; set; }
 
-        [ForeignKey("Payments")]
+        [ForeignKey("CustomerId")]
         public List<Payment> Payments { get; set; }
 
-        [ForeignKey("Creditings")]
+        [ForeignKey("CustomerId")]
         public List<Crediting> Creditings { get; set; }
 
-        [ForeignKey("TransactionWithClients")]
-        public List<TransactionWithCustomer> TransactionWithClients { get; set; }
+        [ForeignKey("CustomerId")]
+        public List<TransactionWithCustomer> TransactionWithCustomers { get; set; }
     }
 }

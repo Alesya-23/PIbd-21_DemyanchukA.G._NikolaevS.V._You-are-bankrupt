@@ -15,5 +15,11 @@ namespace YouBankruptDatabaseImplement.Models
         public int Sum { get; set; }
 
         public Customer Customer { get; set; }
+
+        [ForeignKey("CreditingId")]
+        public virtual List<Payment> Payments { get; set; }
+
+        [ForeignKey("CreditingId")]
+        public virtual List<TransactionWithCustomer> TransactionWithCustomers { get; set; }
     }
 }

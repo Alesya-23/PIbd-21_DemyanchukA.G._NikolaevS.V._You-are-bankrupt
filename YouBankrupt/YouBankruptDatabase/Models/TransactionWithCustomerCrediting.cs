@@ -5,7 +5,7 @@ using YouBankruptDatabaseImplement.Models;
 
 namespace YouBankruptDatabaseImplements.Models
 {
-    class TransactionWithClientCrediting
+    class TransactionWithCustomerCrediting
     {
         public int Id { get; set; }
 
