@@ -10,19 +10,7 @@ namespace YouBankruptDatabaseImplement.Models
     {
         public int Id { get; set; }
 
-        [ForeignKey("ClientId")]
+        [ForeignKey("CustomerId")]
         public int? CustomerId { get; set; }
-
-        [Required]
-        public string CustomerFullName { get; set; }
-
-        [ForeignKey("CreditProgramId")]
-        public int? CreditProgramId { get; set; }
-
-        [Required]
-        public string CreditProgramName { get; set; }
-
-        [ForeignKey("Payments")]
-        public List<Payment> Payments { get; set; }
     }
 }

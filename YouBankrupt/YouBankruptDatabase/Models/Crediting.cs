@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using YouBankruptDatabaseImplements.Models;
 
 namespace YouBankruptDatabaseImplement.Models
 {
@@ -13,7 +14,6 @@ namespace YouBankruptDatabaseImplement.Models
         [Required]
         public int Sum { get; set; }
 
-        [ForeignKey("TransactionWithClientId")]
-        public int? TransactionWithCustomerId { get; set; }
+        public Customer Customer { get; set; }
     }
 }

@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using YouBankruptDatabaseImplement.Models;
 
 namespace YouBankruptDatabaseImplements.Models
 {
-    class Payment_Crediting
+    class PaymentCrediting
     {
         public int? Id { get; set; }
 
         public int? PaymentId { get; set; }
 
+        public virtual Payment Payment { get; set; }
+
         public int? CreditingId { get; set; }
+
+        public virtual Crediting Crediting { get; set; }
     }
 }
