@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using YouBankruptBusinessLogic.BindingModels;
 using YouBankruptBusinessLogic.Interfaces;
-using YouBankruptDatabaseImplement.Models;
+using YouBankruptDatabaseImplements.Models;
 using YouBankruptDatabaseImplements;
+using YouBankruptDatabaseImplements.Models;
 
 namespace YouBankruptDatabaseImplement.Implements
 {
@@ -41,7 +42,7 @@ namespace YouBankruptDatabaseImplement.Implements
                 {
                     Id = payment.Id,
                     Sum = payment.Sum,
-                    TransactionWithCustomerId = payment.TransactionWithCustomerId,
+                    //TransactionWithCustomerId = payment.TransactionWithCustomerId,
                     DatePayment = payment.DatePayment
                 } :
                null;
@@ -61,7 +62,6 @@ namespace YouBankruptDatabaseImplement.Implements
                {
                    Id = rec.Id,
                    Sum = rec.Sum,
-                   TransactionWithCustomerId = rec.TransactionWithCustomerId,
                    DatePayment = rec.DatePayment
                })
                 .ToList();
@@ -77,7 +77,6 @@ namespace YouBankruptDatabaseImplement.Implements
                 {
                     Id = rec.Id,
                     Sum = rec.Sum,
-                    TransactionWithCustomerId = rec.TransactionWithCustomerId,
                     DatePayment = rec.DatePayment
                 })
                .ToList();
@@ -110,7 +109,6 @@ namespace YouBankruptDatabaseImplement.Implements
         private Payment CreateModel(PaymentBindingModel model, Payment payment)
         {
             payment.Sum = model.Sum;
-            payment.TransactionWithCustomerId = model.TransactionWithCustomerId;
             payment.DatePayment = model.DatePayment;
             return payment;
         }

@@ -7,8 +7,10 @@ using YouBankruptBusinessLogic.BindingModels;
 using YouBankruptBusinessLogic.Interfaces;
 using YouBankruptBusinessLogic.ViewModels;
 using YouBankruptDatabaseImplements.Models;
+using YouBankruptDatabaseImplements;
+using YouBankruptDatabaseImplements.Models;
 
-namespace YouBankruptDatabaseImplements.Implements
+namespace YouBankruptDatabaseImplement.Implements
 {
     public class TransactionWithCustomerStorage : ITransactionWithCustomerStorage
     {
@@ -31,55 +33,12 @@ namespace YouBankruptDatabaseImplements.Implements
 
         public TransactionWithCustomerViewModel GetElement(TransactionWithCustomerBindingModel model)
         {
-            if (model == null)
-            {
-                return null;
-            }
-            using (var context = new YouBankruptDatabase())
-            {
-                var transaction = context.TransactionWithCustomers
-                .Include(rec => rec.Payments)
-                .ThenInclude(rec => rec.TransactionWithCustomerId)
-                .FirstOrDefault(rec => rec.Id == model.Id);
-                return transaction != null ?
-                new TransactionWithCustomerViewModel
-                {
-                    Id = transaction.Id,
-                    CustomerId = transaction.CustomerId,
-                    CustomerFullName = transaction.CustomerFullName,
-                   /* Payments = transaction.Payments.ToDictionary(
-                        recPC => recPC.Id, recPC => (recPC.TransactionWithCustomerId, recPC.Sum)
-                    )*/
-                } 
-                : null;
-            }
+            throw new NotImplementedException();
         }
 
         public List<TransactionWithCustomerViewModel> GetFilteredList(TransactionWithCustomerBindingModel model)
         {
-            if (model == null)
-            {
-                return null;
-            }
-            using (var context = new YouBankruptDatabase())
-            {
-                return context.TransactionWithCustomers
-                .Include(rec => rec.Payments)
-                .ThenInclude(rec => rec.TransactionWithCustomerId)
-                .Where(rec => rec.Id.Equals(model.Id))
-                .ToList()
-                .Select(rec => new TransactionWithCustomerViewModel
-                {
-                    Id = rec.Id,
-                    CustomerFullName = rec.CustomerFullName,
-                    CustomerId = rec.CustomerId,
-                    CreditProgramId = rec.CreditProgramId
-                 /*   Payments = rec.Payments
-                .ToDictionary(recPC => recPC.Id, recPC =>
-                (recPC.TransactionWithCustomerId, recPC.Sum))
-                */})
-                .ToList();
-            }
+            throw new NotImplementedException();
         }
 
         public List<TransactionWithCustomerViewModel> GetFullList()

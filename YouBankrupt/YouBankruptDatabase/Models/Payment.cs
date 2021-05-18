@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace YouBankruptDatabaseImplement.Models
+namespace YouBankruptDatabaseImplements.Models
 {
     public class Payment
     {
@@ -16,7 +16,8 @@ namespace YouBankruptDatabaseImplement.Models
         [Required]
         public DateTime? DatePayment { get; set; }
 
-        [ForeignKey("TransactionWithClientId")]
-        public int? TransactionWithCustomerId { get; set; }
+        public int CustomerId { get; set; }
+
+        public virtual Customer Customer { get; set; }
     }
 }

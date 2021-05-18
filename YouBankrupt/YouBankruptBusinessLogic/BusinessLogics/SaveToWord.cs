@@ -11,6 +11,7 @@ namespace YouBankruptBusinessLogic.BusinessLogics
 {
     public static class SaveToWord
     {
+        /*
         /// <summary>
         /// Создание документа
         /// </summary>
@@ -134,5 +135,6 @@ namespace YouBankruptBusinessLogic.BusinessLogics
             }
             return null;
         }
+               */
     }
 }
