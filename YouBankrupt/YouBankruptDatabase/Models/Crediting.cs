@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using YouBankruptDatabaseImplements.Models;
 
-namespace YouBankruptDatabaseImplement.Models
+namespace YouBankruptDatabaseImplements.Models
 {
     public class Crediting
     {
@@ -15,6 +15,9 @@ namespace YouBankruptDatabaseImplement.Models
         public int Sum { get; set; }
 
         public Customer Customer { get; set; }
+
+        [ForeignKey("CurrenceCreditingId")]
+        public virtual List<CurrenceCrediting> CurrenceCreditings { get; set; }
 
         [ForeignKey("CreditingId")]
         public virtual List<Payment> Payments { get; set; }

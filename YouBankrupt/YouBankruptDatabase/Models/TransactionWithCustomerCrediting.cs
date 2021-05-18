@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using YouBankruptDatabaseImplement.Models;
+using YouBankruptDatabaseImplements.Models;
 
 namespace YouBankruptDatabaseImplements.Models
 {

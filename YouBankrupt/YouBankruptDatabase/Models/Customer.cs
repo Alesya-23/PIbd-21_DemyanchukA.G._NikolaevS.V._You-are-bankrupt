@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using YouBankruptDatabaseImplement.Models;
+using YouBankruptDatabaseImplements.Models;
 
 namespace YouBankruptDatabaseImplements.Models
 {

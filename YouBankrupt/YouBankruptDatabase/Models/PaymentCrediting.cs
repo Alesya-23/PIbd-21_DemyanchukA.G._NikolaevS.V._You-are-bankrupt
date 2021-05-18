@@ -1,6 +1,4 @@
-﻿using YouBankruptDatabaseImplement.Models;
-
-namespace YouBankruptDatabaseImplements.Models
+﻿namespace YouBankruptDatabaseImplements.Models
 {
     class PaymentCrediting
     {

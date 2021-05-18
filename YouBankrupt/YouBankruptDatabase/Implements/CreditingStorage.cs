@@ -5,7 +5,7 @@ using System.Text;
 using YouBankruptBusinessLogic.BindingModels;
 using YouBankruptBusinessLogic.Interfaces;
 using YouBankruptBusinessLogic.ViewModels;
-using YouBankruptDatabaseImplement.Models;
+using YouBankruptDatabaseImplements.Models;
 using YouBankruptDatabaseImplements;
 
 namespace YouBankruptDatabaseImplement.Implements
@@ -21,7 +21,6 @@ namespace YouBankruptDatabaseImplement.Implements
                 {
                     Id = rec.Id,
                     Sum = rec.Sum,
-                    TransactionWithCustomerId = rec.TransactionWithCustomerId
                 })
                .ToList();
             }
@@ -58,7 +57,6 @@ namespace YouBankruptDatabaseImplement.Implements
                 {
                     Id = creiting.Id,
                     Sum = creiting.Sum,
-                    TransactionWithCustomerId = creiting.TransactionWithCustomerId
                 } :
                null;
             }
@@ -76,8 +74,7 @@ namespace YouBankruptDatabaseImplement.Implements
                .Select(rec => new CreditingViewModel
                {
                    Id = rec.Id,
-                   Sum = rec.Sum,
-                   TransactionWithCustomerId = rec.TransactionWithCustomerId
+                   Sum = rec.Sum
                })
                 .ToList();
             }
@@ -108,8 +105,7 @@ namespace YouBankruptDatabaseImplement.Implements
 
         private Crediting CreateModel(CreditingBindingModel model, Crediting crediting)
         {
-            crediting.Sum = model.Sum;
-            crediting.TransactionWithCustomerId = model.TransactionWithCustomerId; 
+            crediting.Sum = model.Sum; 
             return crediting;
         }
     }

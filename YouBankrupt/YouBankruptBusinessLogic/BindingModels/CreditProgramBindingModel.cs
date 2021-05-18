@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace YouBankruptBusinessLogic.BindingModels
 {
@@ -13,6 +11,7 @@ namespace YouBankruptBusinessLogic.BindingModels
         public double Persent { get; set; }
 
         public int PaymentTerm { get; set; }
+
         public Dictionary<int, (string, int)> Currenses { get; set; }
 
     }

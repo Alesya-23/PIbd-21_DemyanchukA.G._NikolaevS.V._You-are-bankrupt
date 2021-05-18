@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using YouBankruptDatabaseImplement.Models;
+using YouBankruptDatabaseImplements.Models;
 using YouBankruptDatabaseImplements.Models;
 
 namespace YouBankruptDatabaseImplements
