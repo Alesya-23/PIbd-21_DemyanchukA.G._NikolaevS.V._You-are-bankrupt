@@ -26,9 +26,6 @@ namespace YouBankruptDatabaseImplements.Implements
                    CreditProgramName = rec.CreditProgramName,
                    Persent = rec.Persent,
                    PaymentTerm = rec.PaymentTerm,
-                   Currenses = rec.CreditProgramCurrences
-                .ToDictionary(recPC => recPC.CurrenceId, recPC =>
-               (recPC.Currence?.CurrenceName, recPC.Count))
                })
                .ToList();
             }
@@ -51,10 +48,7 @@ namespace YouBankruptDatabaseImplements.Implements
                    Id = (int)rec.Id,
                    CreditProgramName = rec.CreditProgramName,
                    Persent = rec.Persent,
-                   PaymentTerm = rec.PaymentTerm,
-                   Currenses = rec.CreditProgramCurrences
-                .ToDictionary(recPC => recPC.CurrenceId, recPC =>
-               (recPC.Currence?.CurrenceName, recPC.Count))
+                   PaymentTerm = rec.PaymentTerm
                })
                .ToList();
             }
@@ -79,9 +73,6 @@ namespace YouBankruptDatabaseImplements.Implements
                     CreditProgramName = credit.CreditProgramName,
                     Persent = credit.Persent,
                     PaymentTerm = credit.PaymentTerm,
-                    Currenses = credit.CreditProgramCurrences
-                .ToDictionary(recPC => recPC.CurrenceId, recPC =>
-               (recPC.Currence?.CurrenceName, recPC.Count))
                 } :
                null;
             }
@@ -175,7 +166,7 @@ namespace YouBankruptDatabaseImplements.Implements
                 // обновили количество у существующих записей
                 foreach (var updateCurrence in creditProgramCurrence)
                 {
-                    updateCurrence.Count = model.Currenses[updateCurrence.CurrenceId].Item2;
+                    //updateCurrence.Count = model.Currenses[updateCurrence.CurrenceId].Item2;
                     model.Currenses.Remove(updateCurrence.CurrenceId);
                 }
                 context.SaveChanges();
@@ -187,7 +178,6 @@ namespace YouBankruptDatabaseImplements.Implements
                 {
                     CreditProgramId = (int)creditProgram.Id,
                     CurrenceId = pc.Key,
-                    Count = pc.Value.Item2
                 });
                 context.SaveChanges();
             }

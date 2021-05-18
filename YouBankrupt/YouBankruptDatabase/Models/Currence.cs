@@ -16,6 +16,9 @@ namespace YouBankruptDatabaseImplements.Models
         [Required]
         public string Rate { get; set; }
 
+        [ForeignKey("CurrenceCreditingId")]
+        public virtual List<CurrenceCrediting> CurrenceCreditings { get; set; }
+
         [ForeignKey("CurrenceId")]
         public virtual List<CreditProgramCurrence> CreditProgramCurrences { get; set; }
 

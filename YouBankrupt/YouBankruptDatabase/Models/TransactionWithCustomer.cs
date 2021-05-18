@@ -4,25 +4,20 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace YouBankruptDatabaseImplement.Models
+namespace YouBankruptDatabaseImplements.Models
 {
     public class TransactionWithCustomer
     {
         public int Id { get; set; }
 
-        [ForeignKey("ClientId")]
-        public int? CustomerId { get; set; }
+        [ForeignKey("TransactionWithCustomerId")]
+        public int CustomerId { get; set; }
 
-        [Required]
-        public string CustomerFullName { get; set; }
+        public Customer Customer { get; set; }
 
-        [ForeignKey("CreditProgramId")]
-        public int? CreditProgramId { get; set; }
+        [ForeignKey("TransactionWithCustomerId")]
+        public int CreditingProgramId { get; set; }
 
-        [Required]
-        public string CreditProgramName { get; set; }
-
-        [ForeignKey("Payments")]
-        public List<Payment> Payments { get; set; }
+        public virtual CreditProgram CreditProgram { get; set; }
     }
 }
