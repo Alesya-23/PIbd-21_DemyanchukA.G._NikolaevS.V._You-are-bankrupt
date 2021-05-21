@@ -10,6 +10,8 @@ namespace YouBankruptDatabaseImplements.Models
     {
         public int? Id { get; set; }
 
+        public int? SupplierId { get; set; }
+
         [Required]
         public string PurchasesName { get; set; }
 

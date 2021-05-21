@@ -18,6 +18,15 @@ namespace YouBankruptSupplierView
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            IUnityContainer currentContainer = BuildUnityContainer();
+
+            var mainWindow = currentContainer.Resolve<WindowInital>();
+            mainWindow.Show();
+        }
         private static IUnityContainer BuildUnityContainer()
         {
             var currentContainer = new UnityContainer();
@@ -43,14 +52,6 @@ namespace YouBankruptSupplierView
             HierarchicalLifetimeManager());
 
             return currentContainer;
-        }
-
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            base.OnStartup(e);
-            var container = BuildUnityContainer();
-            var welcomeWindow = container.Resolve<MainWindow>();
-            welcomeWindow.Show();
         }
     }
 }

@@ -14,21 +14,28 @@ using Unity;
 namespace YouBankruptSupplierView
 {
     /// <summary>
-    /// Логика взаимодействия для CreditPrograms.xaml
+    /// Логика взаимодействия для WindowInital.xaml
     /// </summary>
-    public partial class CreditPrograms : Window
+    public partial class WindowInital : Window
     {
         [Dependency]
         public IUnityContainer Container { get; set; }
-        public CreditPrograms()
+
+        public WindowInital()
         {
             InitializeComponent();
         }
 
-        private void AddButton_Click(object sender, RoutedEventArgs e)
+        private void buttonAuthorization_Click(object sender, RoutedEventArgs e)
         {
-            CreditProgram form = Container.Resolve<CreditProgram>();
-            form.Show();
+            var window = Container.Resolve<WindowAutorization>();
+            window.ShowDialog();
+        }
+
+        private void buttonRegistration_Click(object sender, RoutedEventArgs e)
+        {
+            var window = Container.Resolve<WindowRegistration>();
+            window.ShowDialog();
         }
     }
 }

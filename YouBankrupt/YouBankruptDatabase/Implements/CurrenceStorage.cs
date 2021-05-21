@@ -16,12 +16,8 @@ namespace YouBankruptDatabaseImplements.Implements
             using (var context = new YouBankruptDatabase())
             {
                 return context.Currences
-                .Select(rec => new CurrenceViewModel
-                {
-                    Id = (int)rec.Id,
-                    CurrenceName = rec.CurrenceName
-                })
-               .ToList();
+                .Select(CreateModel)
+                .ToList();
             }
         }
         public List<CurrenceViewModel> GetFilteredList(CurrenceBindingModel model)
@@ -33,12 +29,8 @@ namespace YouBankruptDatabaseImplements.Implements
             using (var context = new YouBankruptDatabase())
             {
                 return context.Currences
-                .Where(rec => rec.CurrenceName.Contains(model.CurrenceName))
-               .Select(rec => new CurrenceViewModel
-               {
-                   Id = (int)rec.Id,
-                   CurrenceName = rec.CurrenceName
-               })
+                .Where(rec => rec.SupplierId == model.SupplierId || rec.CurrenceName.Contains(model.CurrenceName))
+               .Select(CreateModel)
                 .ToList();
             }
         }
@@ -54,11 +46,7 @@ namespace YouBankruptDatabaseImplements.Implements
                 .FirstOrDefault(rec => rec.CurrenceName == model.CurrenceName ||
                rec.Id == model.Id);
                 return currence != null ?
-                new CurrenceViewModel
-                {
-                    Id = (int)currence.Id,
-                    CurrenceName = currence.CurrenceName
-                } :
+                 CreateModel(currence) :
                null;
             }
         }
@@ -101,9 +89,23 @@ namespace YouBankruptDatabaseImplements.Implements
                 }
             }
         }
+
+        private CurrenceViewModel CreateModel(Currence currence)
+        {
+            return new CurrenceViewModel
+            {
+                Id = (int)currence.Id,
+                SupplierId = currence.SupplierId,
+                CurrenceName = currence.CurrenceName,
+                Rate = currence.Rate
+            };
+        }
+
         private Currence CreateModel(CurrenceBindingModel model, Currence currence)
         {
+            currence.SupplierId = model.SupplierId;
             currence.CurrenceName = model.CurrenceName;
+            currence.Rate = model.Rate;
             return currence;
         }
     }

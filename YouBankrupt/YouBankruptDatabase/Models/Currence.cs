@@ -9,6 +9,7 @@ namespace YouBankruptDatabaseImplements.Models
     public class Currence
     {
         public int? Id { get; set; }
+        public int? SupplierId { get; set; }
 
         [Required]
         public string CurrenceName { get; set; }
@@ -21,5 +22,7 @@ namespace YouBankruptDatabaseImplements.Models
 
         [ForeignKey("CurrenceId")]
         public virtual List<PurchasesCurrenceCurrence> PurchasesCurrenceCurrences { get; set; }
+
+        public virtual Supplier Supplier { get; set; }
     }
 }

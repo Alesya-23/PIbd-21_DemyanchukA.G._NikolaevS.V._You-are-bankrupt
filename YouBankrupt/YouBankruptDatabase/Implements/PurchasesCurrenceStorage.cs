@@ -54,7 +54,7 @@ namespace YouBankruptDatabaseImplements.Implements
                    Summ = rec.Summ,
                    Currenses = rec.PurchasesCurrenceCurrences
                 .ToDictionary(recPC => recPC.CurrenceId, recPC =>
-               (recPC.Currence?.CurrenceName, recPC.Count))
+              (recPC.Currence?.CurrenceName, recPC.Count))
                })
                .ToList();
             }
@@ -81,7 +81,7 @@ namespace YouBankruptDatabaseImplements.Implements
                     Summ = purchasesCurrence.Summ,
                     Currenses = purchasesCurrence.PurchasesCurrenceCurrences
                 .ToDictionary(recPC => recPC.CurrenceId, recPC =>
-               (recPC.Currence?.CurrenceName, recPC.Count))
+          (recPC.Currence?.CurrenceName, recPC.Count))
                 } :
                null;
             }
@@ -175,7 +175,7 @@ namespace YouBankruptDatabaseImplements.Implements
                 // обновили количество у существующих записей
                 foreach (var updateCurrence in purchasesCurrenceCurrence)
                 {
-                    updateCurrence.Count = model.Currenses[updateCurrence.CurrenceId].Item2;
+                   // updateCurrence.Count = model.Currenses[updateCurrence.CurrenceId].Item2;
                     model.Currenses.Remove(updateCurrence.CurrenceId);
                 }
                 context.SaveChanges();

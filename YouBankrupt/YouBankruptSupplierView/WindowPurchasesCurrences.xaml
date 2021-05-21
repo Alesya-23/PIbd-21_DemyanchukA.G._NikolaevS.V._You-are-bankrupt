@@ -1,4 +1,4 @@
-﻿<Window x:Class="YouBankruptSupplierView.PurchasesCurrences"
+﻿<Window x:Class="YouBankruptSupplierView.WindowPurchasesCurrences"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,7 +11,7 @@
             <ColumnDefinition Width="131*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dataGridListPurchasesCurrunce" Margin="0,0,163,29"/>
+        <DataGrid x:Name="dataGridPurchasesCurrences" Margin="0,0,163,29"/>
         <Button x:Name="AddButton" Content="Добавить" HorizontalAlignment="Left" Margin="584,20,0,0" VerticalAlignment="Top" Height="44" Width="103" Click="ButtonAddCurrence_Click"/>
         <Button x:Name="ChangeButton" Content="Изменить" HorizontalAlignment="Left" Margin="583,95,0,0" VerticalAlignment="Top" Height="44" Width="103" Click="ChangeButton_Click"/>
         <Button x:Name="DeleteButton" Content="Удалить" HorizontalAlignment="Left" Margin="583,169,0,0" VerticalAlignment="Top" Height="44" Width="103" Click="DeleteButton_Click"/>

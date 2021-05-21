@@ -30,6 +30,7 @@
             </MenuItem>
             <MenuItem Header="Закупка валют" Click="PurcharenseCurrenceItemClick"></MenuItem>
             <MenuItem Header="Получение списка" Click="GetListItemClick"></MenuItem>
+            <Label x:Name="labelSupplier" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="White" Foreground="#003466" FontSize="15px" Height="19" Width="121"/>
             <MenuItem Header="Отчёт" Click="GetReportItemClick"></MenuItem>
         </Menu>
     </Grid>

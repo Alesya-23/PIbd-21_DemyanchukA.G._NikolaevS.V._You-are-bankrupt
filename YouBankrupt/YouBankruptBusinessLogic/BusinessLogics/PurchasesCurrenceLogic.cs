@@ -59,5 +59,28 @@ namespace YouBankruptBusinessLogic.BusinessLogics
             }
             _purchasesCurrenceStorage.Delete(model);
         }
+        public List<DateTime> GetPickDate(PurchasesCurrenceBindingModel model)
+        {
+
+            var list = _purchasesCurrenceStorage.GetFilteredList(model);
+
+            List<DateTime> dateOfDay = new List<DateTime>();
+            bool end = false;
+            while (!end) // создали список дат на этот день (потом их будем удалять если они совпадают с эл-ми list)
+            {
+                DateTime date = new DateTime(model.DateBuy.Year, model.DateBuy.Month, model.DateBuy.Day);
+                dateOfDay.Add(date);
+            }
+
+            foreach (var item in list)
+            {
+                DateTime date = new DateTime(model.DateBuy.Year, model.DateBuy.Month, model.DateBuy.Day);
+                if (dateOfDay.Contains(date))
+                {
+                    dateOfDay.Remove(date);
+                }
+            }
+            return dateOfDay;
+        }
     }
 }
