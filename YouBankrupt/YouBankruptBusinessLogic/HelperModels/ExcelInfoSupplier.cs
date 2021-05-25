@@ -9,7 +9,7 @@ namespace YouBankruptBusinessLogic.HelperModels
     {
         public string FileName { get; set; }
         public string Title { get; set; }
-       
-        public List<ReportListDepositsByCurrencyViewModel> ComponentPackage { get; set; }
+
+        public List<ReportCurrencePaymentViewModel> Payments { get; set; }
     }
 }

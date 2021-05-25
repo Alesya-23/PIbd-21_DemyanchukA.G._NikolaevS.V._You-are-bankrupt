@@ -73,27 +73,30 @@ namespace YouBankruptBusinessLogic.BusinessLogics
         /// //список по зачислениям средств к платам на основе выбранных записей валют. 
         /// </summary>
         /// <returns></returns>
-        public List<ReportCurrencePaymentViewModel> GetDistributionList(ReportCurrencePaymentBindingModel model)
+        public List<ReportCurrencePaymentViewModel> GetPaymentList(ReportCurrencePaymentBindingModel model)
         {
-            var listCurrences = _currenceStorage.GetFullList();
+            var listCrediting = _creditingStorage.GetFullList();
             var list = new List<ReportCurrencePaymentViewModel>();
 
-            foreach (var currence in listCurrences)
+            foreach (var credit in listCrediting)
             {
-                foreach (var vp in currence.)
+                //выбрать список платежей
+                foreach (var vp in credit.)
                 {
-                    if (vp.Value == model.ProcedureName)
+                    if (vp.Value == model.CurrenceName)
                     {
-                        var listDistribution = _distributionStorage.GetFilteredList(new DistributionBindingModel { VisitId = currence.Id });
-                        if (listDistribution.Count > 0 && listDistribution != null)
+                        var listPayment = _paymentStorage.GetFilteredList(new PaymentBindingModel { CreditingId = credit.Id });
+                        if (listPayment.Count > 0 && listPayment != null)
                         {
-                            foreach (var distribution in listDistribution)
+                            foreach (var payment in listPayment)
                             {
                                 list.Add(new ReportCurrencePaymentViewModel
-                                {
-                                    ProcedureName = vp.Value,
-                                    Date = distribution.IssueDate,
-                                    EmployeeId = distribution.EmployeeId
+                                { 
+                                    //нужен ли мне тут остаток??
+                                    CurrenceName = vp.Value,
+                                    Date = (DateTime)payment.DatePayment,
+                                    Cost = payment.Sum,
+                                    CreditingId = payment.CreditingId
                                 });
 
                             }
@@ -115,7 +118,7 @@ namespace YouBankruptBusinessLogic.BusinessLogics
             {
                 FileName = model.FileName,
                 Title = "Сведения по выдачам",
-                Distributions = GetDistributionList(new ReportDistributionProcedureBindingModel { ProcedureName = name })
+                Payments = GetPaymentList(new ReportCurrencePaymentBindingModel { CurrenceName = name })
             });
         }
         /// <summary>
@@ -128,7 +131,7 @@ namespace YouBankruptBusinessLogic.BusinessLogics
             {
                 FileName = model.FileName,
                 Title = "Сведения по выдачам",
-                Distributions = GetDistributionList(new ReportDistributionProcedureBindingModel { ProcedureName = name })
+                Payments = GetPaymentList(new ReportCurrencePaymentBindingModel { CurrenceName = name })
             });
         }
         /// <summary>

@@ -6,6 +6,6 @@ namespace YouBankruptBusinessLogic.BindingModels
 {
     public class ReportCurrencePaymentBindingModel
     {
-
+        public string CurrenceName { get; set; }
     }
 }
