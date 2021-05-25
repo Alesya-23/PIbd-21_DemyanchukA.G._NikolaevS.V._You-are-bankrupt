@@ -11,7 +11,7 @@ namespace YouBankruptBusinessLogic.HelperModels
         public string Title { get; set; }
         public DateTime DateFrom { get; set; }
         public DateTime DateTo { get; set; }
-      //  public List<ReportPurhacesCurrenseByTransactionViewModel> PurchasesCurreces { get; set; }
-        //public List<ReportProcurementByTransactionViewModel> Payments { get; set; }
+        public List<ReportPurhacesCurrenseByTransactionViewModel> PurchasesCurreces { get; set; }
+        public List<ReportProcurementByTransactionViewModel> Payments { get; set; }
     }
 }

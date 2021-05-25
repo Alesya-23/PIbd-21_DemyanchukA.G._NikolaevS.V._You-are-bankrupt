@@ -23,10 +23,10 @@ namespace YouBankruptBusinessLogic.BusinessLogics
                 MainDocumentPart mainPart = wordDocument.AddMainDocumentPart();
                 mainPart.Document = new Document();
                 Body docBody = mainPart.Document.AppendChild(new Body());
-                docBody.AppendChild(CreateParagraph(new WordParagraphSupplier
+                docBody.AppendChild(CreateParagraph(new WordParagraph
                 {
-                    Texts = new List<(string, WordTextPropertiesSupplier)> { (info.Title, new WordTextPropertiesSupplier { Bold = true, Size = "24", }) },
-                    TextProperties = new WordTextPropertiesSupplier
+                    Texts = new List<(string, WordTextProperties)> { (info.Title, new WordTextProperties { Bold = true, Size = "24", }) },
+                    TextProperties = new WordTextProperties
                     {
                         Size = "24",
                         JustificationValues = JustificationValues.Center
@@ -70,7 +70,7 @@ namespace YouBankruptBusinessLogic.BusinessLogics
         /// </summary>
         /// <param name="paragraph"></param>
         /// <returns></returns>
-        private static Paragraph CreateParagraph(WordParagraphSupplier paragraph)
+        private static Paragraph CreateParagraph(WordParagraph paragraph)
         {
             if (paragraph != null)
             {
@@ -104,7 +104,7 @@ namespace YouBankruptBusinessLogic.BusinessLogics
         /// </summary>
         /// <param name="paragraphProperties"></param>
         /// <returns></returns>
-        private static ParagraphProperties CreateParagraphProperties(WordTextPropertiesSupplier
+        private static ParagraphProperties CreateParagraphProperties(WordTextProperties
        paragraphProperties)
         {
             if (paragraphProperties != null)

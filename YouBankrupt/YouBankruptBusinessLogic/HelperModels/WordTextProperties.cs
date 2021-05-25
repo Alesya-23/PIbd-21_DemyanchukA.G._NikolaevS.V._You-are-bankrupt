@@ -5,7 +5,7 @@ using System.Text;
 
 namespace YouBankruptBusinessLogic.HelperModels
 {
-    public class WordParagraphPropertiesSupplier
+    public class WordTextProperties
     {
         public string Size { get; set; }
         public bool Bold { get; set; }
