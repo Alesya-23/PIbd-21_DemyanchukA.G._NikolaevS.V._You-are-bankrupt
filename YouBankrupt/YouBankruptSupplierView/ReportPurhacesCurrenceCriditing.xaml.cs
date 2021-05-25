@@ -13,11 +13,11 @@ using System.Windows.Shapes;
 namespace YouBankruptSupplierView
 {
     /// <summary>
-    /// Логика взаимодействия для Registration.xaml
+    /// Логика взаимодействия для ReportPurhacesCurrenceCriditing.xaml
     /// </summary>
-    public partial class Registration : Window
+    public partial class ReportPurhacesCurrenceCriditing : Window
     {
-        public Registration()
+        public ReportPurhacesCurrenceCriditing()
         {
             InitializeComponent();
         }

@@ -23,35 +23,6 @@ namespace YouBankruptDatabaseImplements.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CreditPrograms",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CreditProgramName = table.Column<string>(nullable: false),
-                    Persent = table.Column<double>(nullable: false),
-                    PaymentTerm = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CreditPrograms", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Currences",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CurrenceName = table.Column<string>(nullable: false),
-                    Rate = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Currences", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Customers",
                 columns: table => new
                 {
@@ -104,54 +75,65 @@ namespace YouBankruptDatabaseImplements.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CreditProgramCurrences",
+                name: "CreditPrograms",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CreditProgramId = table.Column<int>(nullable: false),
-                    CurrenceId = table.Column<int>(nullable: false)
+                    SupplierId = table.Column<int>(nullable: true),
+                    CreditProgramName = table.Column<string>(nullable: false),
+                    Persent = table.Column<double>(nullable: false),
+                    PaymentTerm = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CreditProgramCurrences", x => x.Id);
+                    table.PrimaryKey("PK_CreditPrograms", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CreditProgramCurrences_CreditPrograms_CreditProgramId",
-                        column: x => x.CreditProgramId,
-                        principalTable: "CreditPrograms",
+                        name: "FK_CreditPrograms_Suppliers_SupplierId",
+                        column: x => x.SupplierId,
+                        principalTable: "Suppliers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CreditProgramCurrences_Currences_CurrenceId",
-                        column: x => x.CurrenceId,
-                        principalTable: "Currences",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "CurrenceCrediting",
+                name: "Currences",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CurrenceCId = table.Column<int>(nullable: false),
-                    CreditingId = table.Column<int>(nullable: false),
-                    CurrenceCreditingId = table.Column<int>(nullable: true)
+                    SupplierId = table.Column<int>(nullable: true),
+                    CurrenceName = table.Column<string>(nullable: false),
+                    Rate = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CurrenceCrediting", x => x.Id);
+                    table.PrimaryKey("PK_Currences", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CurrenceCrediting_Creditings_CreditingId",
-                        column: x => x.CreditingId,
-                        principalTable: "Creditings",
+                        name: "FK_Currences_Suppliers_SupplierId",
+                        column: x => x.SupplierId,
+                        principalTable: "Suppliers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PurchasesCurrences",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SupplierId = table.Column<int>(nullable: true),
+                    PurchasesName = table.Column<string>(nullable: false),
+                    DateBuy = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PurchasesCurrences", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CurrenceCrediting_Currences_CurrenceCreditingId",
-                        column: x => x.CurrenceCreditingId,
-                        principalTable: "Currences",
+                        name: "FK_PurchasesCurrences_Suppliers_SupplierId",
+                        column: x => x.SupplierId,
+                        principalTable: "Suppliers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -165,7 +147,6 @@ namespace YouBankruptDatabaseImplements.Migrations
                     DateFrom = table.Column<DateTime>(nullable: false),
                     DateTo = table.Column<DateTime>(nullable: false),
                     CustomerId = table.Column<int>(nullable: false),
-                    CreditingProgramId = table.Column<int>(nullable: true),
                     CreditProgramId = table.Column<int>(nullable: true),
                     CreditingId = table.Column<int>(nullable: true)
                 },
@@ -193,25 +174,55 @@ namespace YouBankruptDatabaseImplements.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PurchasesCurrences",
+                name: "CreditingCurrence",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PurchasesName = table.Column<string>(nullable: false),
-                    DateBuy = table.Column<DateTime>(nullable: false),
-                    Summ = table.Column<double>(nullable: false),
-                    SupplierId = table.Column<int>(nullable: true)
+                    CreditingId = table.Column<int>(nullable: false),
+                    CurrenceId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PurchasesCurrences", x => x.Id);
+                    table.PrimaryKey("PK_CreditingCurrence", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PurchasesCurrences_Suppliers_SupplierId",
-                        column: x => x.SupplierId,
-                        principalTable: "Suppliers",
+                        name: "FK_CreditingCurrence_Creditings_CreditingId",
+                        column: x => x.CreditingId,
+                        principalTable: "Creditings",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CreditingCurrence_Currences_CurrenceId",
+                        column: x => x.CurrenceId,
+                        principalTable: "Currences",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CreditProgramCurrences",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreditProgramId = table.Column<int>(nullable: false),
+                    CurrenceId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CreditProgramCurrences", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CreditProgramCurrences_CreditPrograms_CreditProgramId",
+                        column: x => x.CreditProgramId,
+                        principalTable: "CreditPrograms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CreditProgramCurrences_Currences_CurrenceId",
+                        column: x => x.CurrenceId,
+                        principalTable: "Currences",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -243,6 +254,16 @@ namespace YouBankruptDatabaseImplements.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_CreditingCurrence_CreditingId",
+                table: "CreditingCurrence",
+                column: "CreditingId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CreditingCurrence_CurrenceId",
+                table: "CreditingCurrence",
+                column: "CurrenceId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CreditProgramCurrences_CreditProgramId",
                 table: "CreditProgramCurrences",
                 column: "CreditProgramId");
@@ -253,14 +274,14 @@ namespace YouBankruptDatabaseImplements.Migrations
                 column: "CurrenceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CurrenceCrediting_CreditingId",
-                table: "CurrenceCrediting",
-                column: "CreditingId");
+                name: "IX_CreditPrograms_SupplierId",
+                table: "CreditPrograms",
+                column: "SupplierId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CurrenceCrediting_CurrenceCreditingId",
-                table: "CurrenceCrediting",
-                column: "CurrenceCreditingId");
+                name: "IX_Currences_SupplierId",
+                table: "Currences",
+                column: "SupplierId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Payments_CreditingId",
@@ -301,10 +322,10 @@ namespace YouBankruptDatabaseImplements.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CreditProgramCurrences");
+                name: "CreditingCurrence");
 
             migrationBuilder.DropTable(
-                name: "CurrenceCrediting");
+                name: "CreditProgramCurrences");
 
             migrationBuilder.DropTable(
                 name: "Payments");

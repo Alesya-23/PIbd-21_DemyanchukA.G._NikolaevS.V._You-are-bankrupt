@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Unity;
 using YouBankruptBusinessLogic.BindingModels;
 using YouBankruptBusinessLogic.BusinessLogics;
 using YouBankruptBusinessLogic.ViewModels;
@@ -18,13 +19,16 @@ namespace YouBankruptSupplierView
     /// <summary>
     /// Логика взаимодействия для CreateCurrenceForm.xaml
     /// </summary>
-    public partial class Currence : Window
+    public partial class WindowCurrence : Window
     {
         CurrenceLogic _logic;
         public int Id { set { id = value; } }
         private int? id;
+        public IUnityContainer Container { get; set; }
+        public int SupplierId { set { supplierId = value; } }
+        private int? supplierId;
 
-        public Currence(CurrenceLogic logic)
+        public WindowCurrence(CurrenceLogic logic)
         {
             InitializeComponent();
             _logic = logic;
@@ -70,11 +74,13 @@ namespace YouBankruptSupplierView
                 _logic.CreateOrUpdate(new CurrenceBindingModel
                 {
                     Id = id,
-                    CurrenceName = NameCurrence.Text,
-                    Rate = Rate.Text
+                    CurrenceName = NameCurrence.Text.ToString(),
+                    Rate = Rate.Text.ToString(),
+                    SupplierId = supplierId
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",
                MessageBoxButton.OK, MessageBoxImage.Information);
+                this.DialogResult = true;
                 Close();
             }
             catch (Exception ex)
@@ -86,7 +92,9 @@ namespace YouBankruptSupplierView
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = false;
             Close();
         }
     }
 }
+

@@ -14,21 +14,28 @@ using Unity;
 namespace YouBankruptSupplierView
 {
     /// <summary>
-    /// Логика взаимодействия для PurchasesCurrences.xaml
+    /// Логика взаимодействия для WindowInital.xaml
     /// </summary>
-    public partial class PurchasesCurrences : Window
+    public partial class WindowInital : Window
     {
         [Dependency]
         public IUnityContainer Container { get; set; }
-        public PurchasesCurrences()
+
+        public WindowInital()
         {
             InitializeComponent();
         }
 
-        private void ButtonAddCurrence_Click(object sender, RoutedEventArgs e)
+        private void buttonAuthorization_Click(object sender, RoutedEventArgs e)
         {
-            PurchasesCurrence form = Container.Resolve<PurchasesCurrence>();
-            form.Show();
+            var window = Container.Resolve<WindowAutorization>();
+            window.ShowDialog();
+        }
+
+        private void buttonRegistration_Click(object sender, RoutedEventArgs e)
+        {
+            var window = Container.Resolve<WindowRegistration>();
+            window.ShowDialog();
         }
     }
 }

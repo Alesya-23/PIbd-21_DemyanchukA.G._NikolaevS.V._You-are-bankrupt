@@ -36,7 +36,12 @@ namespace YouBankruptDatabaseImplements.Migrations
                     b.Property<double>("Persent")
                         .HasColumnType("float");
 
+                    b.Property<int?>("SupplierId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("SupplierId");
 
                     b.ToTable("CreditPrograms");
                 });
@@ -85,6 +90,28 @@ namespace YouBankruptDatabaseImplements.Migrations
                     b.ToTable("Creditings");
                 });
 
+            modelBuilder.Entity("YouBankruptDatabaseImplements.Models.CreditingCurrence", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CreditingId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CurrenceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreditingId");
+
+                    b.HasIndex("CurrenceId");
+
+                    b.ToTable("CreditingCurrence");
+                });
+
             modelBuilder.Entity("YouBankruptDatabaseImplements.Models.Currence", b =>
                 {
                     b.Property<int?>("Id")
@@ -100,34 +127,14 @@ namespace YouBankruptDatabaseImplements.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("SupplierId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("SupplierId");
 
                     b.ToTable("Currences");
-                });
-
-            modelBuilder.Entity("YouBankruptDatabaseImplements.Models.CurrenceCrediting", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CreditingId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CurrenceCId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CurrenceCreditingId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CreditingId");
-
-                    b.HasIndex("CurrenceCreditingId");
-
-                    b.ToTable("CurrenceCrediting");
                 });
 
             modelBuilder.Entity("YouBankruptDatabaseImplements.Models.Customer", b =>
@@ -194,9 +201,6 @@ namespace YouBankruptDatabaseImplements.Migrations
                     b.Property<string>("PurchasesName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Summ")
-                        .HasColumnType("float");
 
                     b.Property<int?>("SupplierId")
                         .HasColumnType("int");
@@ -293,6 +297,13 @@ namespace YouBankruptDatabaseImplements.Migrations
                     b.ToTable("Transactions");
                 });
 
+            modelBuilder.Entity("YouBankruptDatabaseImplements.Models.CreditProgram", b =>
+                {
+                    b.HasOne("YouBankruptDatabaseImplements.Models.Supplier", "Supplier")
+                        .WithMany("CreditPrograms")
+                        .HasForeignKey("SupplierId");
+                });
+
             modelBuilder.Entity("YouBankruptDatabaseImplements.Models.CreditProgramCurrence", b =>
                 {
                     b.HasOne("YouBankruptDatabaseImplements.Models.CreditProgram", "CreditProgram")
@@ -308,17 +319,26 @@ namespace YouBankruptDatabaseImplements.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("YouBankruptDatabaseImplements.Models.CurrenceCrediting", b =>
+            modelBuilder.Entity("YouBankruptDatabaseImplements.Models.CreditingCurrence", b =>
                 {
-                    b.HasOne("YouBankruptDatabaseImplements.Models.Crediting", "Visit")
+                    b.HasOne("YouBankruptDatabaseImplements.Models.Crediting", "Crediting")
                         .WithMany()
                         .HasForeignKey("CreditingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("YouBankruptDatabaseImplements.Models.Currence", "Procedure")
-                        .WithMany("CurrenceCreditings")
-                        .HasForeignKey("CurrenceCreditingId");
+                    b.HasOne("YouBankruptDatabaseImplements.Models.Currence", "Currence")
+                        .WithMany("Crediting")
+                        .HasForeignKey("CurrenceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("YouBankruptDatabaseImplements.Models.Currence", b =>
+                {
+                    b.HasOne("YouBankruptDatabaseImplements.Models.Supplier", "Supplier")
+                        .WithMany("Currences")
+                        .HasForeignKey("SupplierId");
                 });
 
             modelBuilder.Entity("YouBankruptDatabaseImplements.Models.Payment", b =>
@@ -331,7 +351,7 @@ namespace YouBankruptDatabaseImplements.Migrations
             modelBuilder.Entity("YouBankruptDatabaseImplements.Models.PurchasesCurrence", b =>
                 {
                     b.HasOne("YouBankruptDatabaseImplements.Models.Supplier", "Supplier")
-                        .WithMany()
+                        .WithMany("PurchasesCurrences")
                         .HasForeignKey("SupplierId");
                 });
 

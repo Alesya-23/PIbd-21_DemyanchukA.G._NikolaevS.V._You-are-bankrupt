@@ -9,6 +9,8 @@ namespace YouBankruptBusinessLogic.ViewModels
     {
         public int Id { get; set; }
 
+        public int? SupplierId { get; set; }
+
         [DisplayName("Название кредитной программы")]
         public string CreditProgramName { get; set; }
 
@@ -18,6 +20,6 @@ namespace YouBankruptBusinessLogic.ViewModels
         [DisplayName("Срок оплаты")]
         public int PaymentTerm { get; set; }
 
-        public Dictionary<int, (string, int)> Currenses { get; set; }
+        public Dictionary<int, string> Currenses { get; set; }
     }
 }

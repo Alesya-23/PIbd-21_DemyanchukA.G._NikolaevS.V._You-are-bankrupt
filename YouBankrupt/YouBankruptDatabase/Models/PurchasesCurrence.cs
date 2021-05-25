@@ -10,14 +10,13 @@ namespace YouBankruptDatabaseImplements.Models
     {
         public int? Id { get; set; }
 
+        public int? SupplierId { get; set; }
+
         [Required]
         public string PurchasesName { get; set; }
 
         [Required]
         public DateTime DateBuy { get; set; }
-
-        [Required]
-        public double Summ { get; set; }
 
         public virtual Supplier Supplier { get; set; }
 

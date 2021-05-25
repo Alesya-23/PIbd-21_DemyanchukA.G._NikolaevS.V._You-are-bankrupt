@@ -8,26 +8,27 @@ using YouBankruptBusinessLogic.ViewModels;
 namespace YouBankruptBusinessLogic.BusinessLogics
 {
     public class CreditProgramLogic
-    { private readonly ICreditProgramStorage _packageStorage;
-        public CreditProgramLogic(ICreditProgramStorage packageStorage)
+    { private readonly ICreditProgramStorage creditProgramStoarage;
+        public CreditProgramLogic(ICreditProgramStorage creditProgramStorage)
         {
-            _packageStorage = packageStorage;
+            creditProgramStoarage = creditProgramStorage;
         }
         public List<CreditProgramViewModel> Read(CreditProgramBindingModel model)
         {
             if (model == null)
             {
-                return _packageStorage.GetFullList();
+                return creditProgramStoarage.GetFullList();
             }
             if (model.Id.HasValue)
             {
-                return new List<CreditProgramViewModel> { _packageStorage.GetElement(model)};
+                return new List<CreditProgramViewModel> { creditProgramStoarage.GetElement(model)
+};
             }
-            return _packageStorage.GetFilteredList(model);
+            return creditProgramStoarage.GetFilteredList(model);
         }
         public void CreateOrUpdate(CreditProgramBindingModel model)
         {
-            var element = _packageStorage.GetElement(new CreditProgramBindingModel
+            var element = creditProgramStoarage.GetElement(new CreditProgramBindingModel
             {
                 CreditProgramName = model.CreditProgramName
             });
@@ -37,16 +38,16 @@ namespace YouBankruptBusinessLogic.BusinessLogics
             }
             if (model.Id.HasValue)
             {
-                _packageStorage.Update(model);
+                creditProgramStoarage.Update(model);
             }
             else
             {
-                _packageStorage.Insert(model);
+                creditProgramStoarage.Insert(model);
             }
         }
         public void Delete(CreditProgramBindingModel model)
         {
-            var element = _packageStorage.GetElement(new CreditProgramBindingModel
+            var element = creditProgramStoarage.GetElement(new CreditProgramBindingModel
             {
                 Id = model.Id
             });
@@ -54,7 +55,7 @@ namespace YouBankruptBusinessLogic.BusinessLogics
             {
                 throw new Exception("Элемент не найден");
             }
-            _packageStorage.Delete(model);
+            creditProgramStoarage.Delete(model);
         }
     }
 }

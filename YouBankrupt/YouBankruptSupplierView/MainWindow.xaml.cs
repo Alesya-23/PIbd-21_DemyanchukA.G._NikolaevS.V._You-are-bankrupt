@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Unity;
+using YouBankruptBusinessLogic.BindingModels;
+using YouBankruptBusinessLogic.BusinessLogics;
 
 namespace YouBankruptSupplierView
 {
@@ -23,26 +25,36 @@ namespace YouBankruptSupplierView
     {
         [Dependency]
         public IUnityContainer Container { get; set; }
-        public MainWindow()
+
+        public int Id { set { id = value; } }
+
+        private int? id;
+
+        private SupplierLogic logic;
+        public MainWindow(SupplierLogic logic)
         {
             InitializeComponent();
+            this.logic = logic;
         }
 
         private void CreditProgramItemClick(object sender, RoutedEventArgs e)
         {
-            CreditPrograms form = Container.Resolve<CreditPrograms>();
+            WindowCreditPrograms form = Container.Resolve<WindowCreditPrograms>();
+            form.Id = (int)id;
             form.Show();
         }
 
         private void CurrenceItemClick(object sender, RoutedEventArgs e)
         {
-            Currences form = Container.Resolve<Currences>();
+            WindowCurrences form = Container.Resolve<WindowCurrences>();
+            form.Id = (int)id;
             form.Show();
         }
 
         private void PurcharenseCurrenceItemClick(object sender, RoutedEventArgs e)
         {
-            PurchasesCurrences form = Container.Resolve<PurchasesCurrences>();
+            WindowPurchasesCurrences form = Container.Resolve<WindowPurchasesCurrences>();
+           form.Id = (int)id;
             form.Show();
         }
 
@@ -54,6 +66,11 @@ namespace YouBankruptSupplierView
         private void GetReportItemClick(object sender, RoutedEventArgs e)
         {
 
+        }
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            var supplier = logic.Read(new SupplierBindingModel { Id = id })?[0];
+            labelSupplier.Content = "Клиент: " + supplier.SupplierFullName;
         }
     }
 }
