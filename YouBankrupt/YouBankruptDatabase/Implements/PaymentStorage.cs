@@ -5,7 +5,8 @@ using YouBankruptBusinessLogic.BindingModels;
 using YouBankruptBusinessLogic.Interfaces;
 using YouBankruptDatabaseImplements.Models;
 using YouBankruptDatabaseImplements;
-using YouBankruptDatabaseImplements.Models;
+using Microsoft.EntityFrameworkCore;
+using YouBankruptBusinessLogic.ViewModels;
 
 namespace YouBankruptDatabaseImplement.Implements
 {
@@ -42,7 +43,6 @@ namespace YouBankruptDatabaseImplement.Implements
                 {
                     Id = payment.Id,
                     Sum = payment.Sum,
-                    //TransactionWithCustomerId = payment.TransactionWithCustomerId,
                     DatePayment = payment.DatePayment
                 } :
                null;
@@ -58,12 +58,13 @@ namespace YouBankruptDatabaseImplement.Implements
             using (var context = new YouBankruptDatabase())
             {
                 return context.Payments
-               .Select(rec => new PaymentViewModel
-               {
-                   Id = rec.Id,
-                   Sum = rec.Sum,
-                   DatePayment = rec.DatePayment
-               })
+                .Where(rec => rec.CustomerId == model.CustomerId)
+                .Select(rec => new PaymentViewModel
+                {
+                    Id = rec.Id,
+                    Sum = rec.Sum,
+                    DatePayment = rec.DatePayment
+                })
                 .ToList();
             }
         }
@@ -73,12 +74,12 @@ namespace YouBankruptDatabaseImplement.Implements
             using (var context = new YouBankruptDatabase())
             {
                 return context.Payments
-                .Select(rec => new PaymentViewModel
-                {
-                    Id = rec.Id,
-                    Sum = rec.Sum,
-                    DatePayment = rec.DatePayment
-                })
+                    .Select(rec => new PaymentViewModel
+                    {
+                        Id = rec.Id,
+                        Sum = rec.Sum,
+                        DatePayment = rec.DatePayment
+                    })
                .ToList();
             }
         }
@@ -110,6 +111,7 @@ namespace YouBankruptDatabaseImplement.Implements
         {
             payment.Sum = model.Sum;
             payment.DatePayment = model.DatePayment;
+            payment.CustomerId = (int)model.CustomerId;
             return payment;
         }
     }

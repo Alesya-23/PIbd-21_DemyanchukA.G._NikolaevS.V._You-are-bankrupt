@@ -7,16 +7,14 @@ namespace YouBankruptBusinessLogic.BindingModels
 {
     public class CreditingBindingModel
     {
-        [DataMember]
         public int? Id { get; set; }
 
-        [DataMember]
-        public int Sum { get; set; }
-
-        [DataMember]
         public int? CustomerId { get; set; }
 
-        [DataMember]
-        public int? TransactionWithCustomerId { get; set; }
+        public DateTime DateCredit { get; set; }
+
+        public int Sum { get; set; }
+
+        public Dictionary<int, int> CreditPayments { get; set; }
     }
 }

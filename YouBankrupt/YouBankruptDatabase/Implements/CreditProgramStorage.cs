@@ -77,6 +77,7 @@ namespace YouBankruptDatabaseImplements.Implements
                null;
             }
         }
+
         public void Insert(CreditProgramBindingModel model)
         {
             using (var context = new YouBankruptDatabase())

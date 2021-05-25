@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace YouBankruptBusinessLogic.BindingModels
 {
-    public class PaymentBindingModel
+    public class TransactionBindingModel
     {
         public int? Id { get; set; }
 
+        public DateTime? DateFrom { get; set; }
+
+        public DateTime? DateTo { get; set; }
+
         public int? CustomerId { get; set; }
 
-        public int Sum { get; set; }
+        public int CreditProgramId { get; set; }
 
-        public DateTime? DatePayment { get; set; }
+        public int CreditingId { get; set; }
     }
 }

@@ -1,0 +1,31 @@
+﻿<Window x:Class="YouBankruptProviderView.TransactionWithCustomer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YouBankruptProviderView"
+        mc:Ignorable="d"
+        Title="TransactionWithCustomer" Height="280" Width="260" Loaded="TransactionWithCustomer_Loaded">
+    <Grid HorizontalAlignment="Left" Width="800">
+        <ComboBox x:Name="comboBoxCreditProgram" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="189"/>
+        <Label Content="Кредитная программа" HorizontalAlignment="Left" Margin="10,19,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnSaeve" Content="Сохранить" HorizontalAlignment="Left" Margin="10,224,0,0" VerticalAlignment="Top" Click="btnSaeve_Click"/>
+        <Button x:Name="btnCancel" Content="Отмена" HorizontalAlignment="Left" Margin="153,224,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="datePikerDateFrom" HorizontalAlignment="Left" Margin="53,132,0,0" VerticalAlignment="Top" Width="146"/>
+        <DatePicker x:Name="datePikerDateTo" HorizontalAlignment="Left" Margin="53,174,0,0" VerticalAlignment="Top" Width="146"/>
+        <Label Content="C" HorizontalAlignment="Left" Margin="24,132,0,0" VerticalAlignment="Top"/>
+        <Label Content="По&#xD;&#xA;" HorizontalAlignment="Left" Margin="16,172,0,0" VerticalAlignment="Top" Width="34" RenderTransformOrigin="0.5,0.5" Height="26">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="-0.435"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="-0.159"/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <ComboBox x:Name="comboBoxCrediting"  HorizontalAlignment="Left" Margin="10,94,0,0" VerticalAlignment="Top" Width="189"/>
+        <Label Content="Выплата" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

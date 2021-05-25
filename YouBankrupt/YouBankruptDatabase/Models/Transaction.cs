@@ -6,18 +6,26 @@ using System.Text;
 
 namespace YouBankruptDatabaseImplements.Models
 {
-    public class TransactionWithCustomer
+    public class Transaction
     {
         public int Id { get; set; }
 
-        [ForeignKey("TransactionWithCustomerId")]
+        [Required]
+        public DateTime DateFrom { get; set; }
+
+        [Required]
+        public DateTime DateTo { get; set; }
+
         public int CustomerId { get; set; }
 
-        public Customer Customer { get; set; }
+        public virtual Customer Customer { get; set; }
 
-        [ForeignKey("TransactionWithCustomerId")]
-        public int CreditingProgramId { get; set; }
+        public int? CreditProgramId { get; set; }
 
         public virtual CreditProgram CreditProgram { get; set; }
+
+        public int? CreditingId { get; set; }
+
+        public virtual Crediting Crediting { get; set; }
     }
 }

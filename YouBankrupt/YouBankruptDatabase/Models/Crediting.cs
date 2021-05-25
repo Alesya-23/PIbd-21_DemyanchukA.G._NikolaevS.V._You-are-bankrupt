@@ -12,17 +12,18 @@ namespace YouBankruptDatabaseImplements.Models
         public int Id { get; set; }
 
         [Required]
+        public int? CustomerId { get; set; }
+
+        [Required]
         public int Sum { get; set; }
 
-        public Customer Customer { get; set; }
+        [Required]
+        public DateTime DateCredit { get; set; }
 
-        [ForeignKey("CurrenceCreditingId")]
-        public virtual List<CurrenceCrediting> CurrenceCreditings { get; set; }
+        /*[ForeignKey("CreditingId")]
+        public virtual List<CurrenceCrediting> CurrenceCreditings { get; set; }*/
 
         [ForeignKey("CreditingId")]
         public virtual List<Payment> Payments { get; set; }
-
-        [ForeignKey("CreditingId")]
-        public virtual List<TransactionWithCustomer> TransactionWithCustomers { get; set; }
     }
 }

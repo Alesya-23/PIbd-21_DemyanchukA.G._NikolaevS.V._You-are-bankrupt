@@ -30,6 +30,8 @@ namespace YouBankruptDatabaseImplements
 
         public virtual DbSet<Payment> Payments { set; get; }
 
-        public virtual DbSet<TransactionWithCustomer> TransactionWithCustomers { set; get; }
+        public virtual DbSet<Customer> Customers { set; get; }
+
+        public virtual DbSet<Transaction> Transactions { set; get; }
     }
 }

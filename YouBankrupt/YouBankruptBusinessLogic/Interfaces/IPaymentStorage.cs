@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using YouBankruptBusinessLogic.BindingModels;
-using YouBankruptDatabaseImplement;
+using YouBankruptBusinessLogic.ViewModels;
 
 namespace YouBankruptBusinessLogic.Interfaces
 {

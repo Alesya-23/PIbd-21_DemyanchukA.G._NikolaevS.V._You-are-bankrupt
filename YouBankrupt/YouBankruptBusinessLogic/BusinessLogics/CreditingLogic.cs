@@ -31,8 +31,14 @@ namespace YouBankruptBusinessLogic.BusinessLogic
 
         public void CreateOrUpdate(CreditingBindingModel model)
         {
-            
-            throw new NotImplementedException();
+            if (model.Id.HasValue)
+            {
+                _creditingStorage.Update(model);
+            }
+            else
+            {
+                _creditingStorage.Insert(model);
+            }
         }
 
         public void Delete(CreditingBindingModel model)

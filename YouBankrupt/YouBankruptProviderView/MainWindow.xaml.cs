@@ -9,32 +9,62 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Unity;
+using YouBankruptBusinessLogic.BindingModels;
+using YouBankruptBusinessLogic.BusinessLogic;
 
-namespace YouBankruptCustomerView
+namespace YouBankruptProviderView
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        [Dependency]
+        public IUnityContainer Container { get; set; }
+
+        public int Id { set { id = value; } }
+
+        private int? id;
+
+        private CustomerLogic _logic;
+
+        public MainWindow(CustomerLogic logic)
         {
             InitializeComponent();
+            this._logic = logic;
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+            var customer = _logic.Read(new CustomerBindingModel { Id = id })?[0];
+            Lable_Customer.Content = "Заказчик: " + customer.Email + " ФИО: " + customer.CustomerFullName;
         }
 
         private void TransactionWithCustomerItem_Click(object sender, RoutedEventArgs e)
         {
-            new FormTransactionWithCustomer().ShowDialog();
+            var window = Container.Resolve<FormTransactionWithCustomers>();
+            window.Id = (int)id;
+            window.ShowDialog();
         }
 
         private void PaymentItem_Click(object sender, RoutedEventArgs e)
         {
-            new FormPayment().ShowDialog();
+            var window = Container.Resolve<FormPayments>();
+            window.Id = (int)id;
+            window.ShowDialog();
         }
 
         private void CreditingItem_Click(object sender, RoutedEventArgs e)
         {
-            new FormCrediting().ShowDialog();
+            var window = Container.Resolve<FormCreditings>();
+            window.Id = (int)id;
+            window.ShowDialog();
         }
 
         private void ListItem_Click(object sender, RoutedEventArgs e)

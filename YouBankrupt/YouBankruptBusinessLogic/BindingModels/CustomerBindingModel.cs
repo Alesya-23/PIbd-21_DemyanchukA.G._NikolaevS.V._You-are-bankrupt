@@ -5,18 +5,14 @@ using System.Text;
 
 namespace YouBankruptBusinessLogic.BindingModels
 {
-    class CustomerBindingModel
+    public class CustomerBindingModel
     {
-        [DataMember]
         public int? Id { get; set; }
 
-        [DataMember]
         public string CustomerFullName { get; set; }
 
-        [DataMember]
         public string Email { get; set; }
 
-        [DataMember]
         public string Password { get; set; }
     }
 }

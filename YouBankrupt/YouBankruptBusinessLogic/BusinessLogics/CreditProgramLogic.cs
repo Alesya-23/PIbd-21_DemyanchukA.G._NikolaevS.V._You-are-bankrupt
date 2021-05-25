@@ -21,8 +21,7 @@ namespace YouBankruptBusinessLogic.BusinessLogics
             }
             if (model.Id.HasValue)
             {
-                return new List<CreditProgramViewModel> { _packageStorage.GetElement(model)
-};
+                return new List<CreditProgramViewModel> { _packageStorage.GetElement(model)};
             }
             return _packageStorage.GetFilteredList(model);
         }

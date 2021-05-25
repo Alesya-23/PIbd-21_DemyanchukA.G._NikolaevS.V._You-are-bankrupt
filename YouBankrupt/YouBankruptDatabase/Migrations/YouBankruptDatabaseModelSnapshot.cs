@@ -71,14 +71,16 @@ namespace YouBankruptDatabaseImplements.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("CustomerId")
+                        .IsRequired()
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("DateCredit")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Sum")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
 
                     b.ToTable("Creditings");
                 });
@@ -121,6 +123,8 @@ namespace YouBankruptDatabaseImplements.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreditingId");
+
                     b.HasIndex("CurrenceCreditingId");
 
                     b.ToTable("CurrenceCrediting");
@@ -147,7 +151,7 @@ namespace YouBankruptDatabaseImplements.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customer");
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("YouBankruptDatabaseImplements.Models.Payment", b =>
@@ -160,11 +164,11 @@ namespace YouBankruptDatabaseImplements.Migrations
                     b.Property<int?>("CreditingId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomerId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DatePayment")
-                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Sum")
@@ -173,8 +177,6 @@ namespace YouBankruptDatabaseImplements.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CreditingId");
-
-                    b.HasIndex("CustomerId");
 
                     b.ToTable("Payments");
                 });
@@ -258,7 +260,7 @@ namespace YouBankruptDatabaseImplements.Migrations
                     b.ToTable("Suppliers");
                 });
 
-            modelBuilder.Entity("YouBankruptDatabaseImplements.Models.TransactionWithCustomer", b =>
+            modelBuilder.Entity("YouBankruptDatabaseImplements.Models.Transaction", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -271,11 +273,14 @@ namespace YouBankruptDatabaseImplements.Migrations
                     b.Property<int?>("CreditingId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CreditingProgramId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("DateFrom")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateTo")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -285,7 +290,7 @@ namespace YouBankruptDatabaseImplements.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("TransactionWithCustomers");
+                    b.ToTable("Transactions");
                 });
 
             modelBuilder.Entity("YouBankruptDatabaseImplements.Models.CreditProgramCurrence", b =>
@@ -303,18 +308,13 @@ namespace YouBankruptDatabaseImplements.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("YouBankruptDatabaseImplements.Models.Crediting", b =>
-                {
-                    b.HasOne("YouBankruptDatabaseImplements.Models.Customer", "Customer")
-                        .WithMany("Creditings")
-                        .HasForeignKey("CustomerId");
-                });
-
             modelBuilder.Entity("YouBankruptDatabaseImplements.Models.CurrenceCrediting", b =>
                 {
                     b.HasOne("YouBankruptDatabaseImplements.Models.Crediting", "Visit")
-                        .WithMany("CurrenceCreditings")
-                        .HasForeignKey("CurrenceCreditingId");
+                        .WithMany()
+                        .HasForeignKey("CreditingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("YouBankruptDatabaseImplements.Models.Currence", "Procedure")
                         .WithMany("CurrenceCreditings")
@@ -326,12 +326,6 @@ namespace YouBankruptDatabaseImplements.Migrations
                     b.HasOne("YouBankruptDatabaseImplements.Models.Crediting", null)
                         .WithMany("Payments")
                         .HasForeignKey("CreditingId");
-
-                    b.HasOne("YouBankruptDatabaseImplements.Models.Customer", "Customer")
-                        .WithMany("Payments")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("YouBankruptDatabaseImplements.Models.PurchasesCurrence", b =>
@@ -354,14 +348,14 @@ namespace YouBankruptDatabaseImplements.Migrations
                         .HasForeignKey("PurchasesCurrenseId");
                 });
 
-            modelBuilder.Entity("YouBankruptDatabaseImplements.Models.TransactionWithCustomer", b =>
+            modelBuilder.Entity("YouBankruptDatabaseImplements.Models.Transaction", b =>
                 {
                     b.HasOne("YouBankruptDatabaseImplements.Models.CreditProgram", "CreditProgram")
                         .WithMany()
                         .HasForeignKey("CreditProgramId");
 
-                    b.HasOne("YouBankruptDatabaseImplements.Models.Crediting", null)
-                        .WithMany("TransactionWithCustomers")
+                    b.HasOne("YouBankruptDatabaseImplements.Models.Crediting", "Crediting")
+                        .WithMany()
                         .HasForeignKey("CreditingId");
 
                     b.HasOne("YouBankruptDatabaseImplements.Models.Customer", "Customer")
