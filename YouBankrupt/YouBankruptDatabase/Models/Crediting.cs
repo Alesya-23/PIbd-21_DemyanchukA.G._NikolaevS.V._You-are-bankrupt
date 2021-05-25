@@ -15,6 +15,9 @@ namespace YouBankruptDatabaseImplements.Models
         public int? CustomerId { get; set; }
 
         [Required]
+        public int? CurrenceId { get; set; }
+
+        [Required]
         public int Sum { get; set; }
 
         [Required]

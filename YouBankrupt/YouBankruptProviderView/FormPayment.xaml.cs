@@ -57,7 +57,9 @@ namespace YouBankruptProviderView
                     Id = null,
                     Sum = Convert.ToInt32(textBoxSum.Text),
                     DatePayment = pickDate.SelectedDate,
-                    CustomerId = id
+                    CustomerId = id,
+                    CurrenceId = 1,
+                    PurchasesCurrenceId = 1,
                 });
                 MessageBox.Show("Сохранение прошло успешно", "", MessageBoxButton.OK, MessageBoxImage.Information);
                 DialogResult = true;
