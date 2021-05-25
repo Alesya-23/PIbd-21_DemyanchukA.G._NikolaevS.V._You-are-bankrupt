@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace YouBankruptBusinessLogic.BusinessLogic
+namespace YouBankruptBusinessLogic.BusinessLogics
 {
-    class TransactionWithCustomerLogic
+    public class TransactionWithCustomerLogic
     {
     }
 }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using YouBankruptDatabaseImplements;
 
 namespace YouBankruptDatabaseImplements.Migrations
 {
     [DbContext(typeof(YouBankruptDatabase))]
-    partial class YouBankruptDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20210521073324_AddNodeToCustomer")]
+    partial class AddNodeToCustomer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

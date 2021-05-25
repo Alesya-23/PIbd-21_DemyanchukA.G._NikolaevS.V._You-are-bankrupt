@@ -5,10 +5,11 @@ using System.Text;
 
 namespace YouBankruptBusinessLogic.HelperModels
 {
-    public class ExcelInfo
+    public class ExcelInfoSupplier
     {
         public string FileName { get; set; }
         public string Title { get; set; }
+       
         public List<ReportListDepositsByCurrencyViewModel> ComponentPackage { get; set; }
     }
 }

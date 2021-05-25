@@ -33,7 +33,7 @@ namespace YouBankruptSupplierView
         private int? id;
         private int? supplierId;
         private Dictionary<int, (string, int)> purchasesCurrences;
-        private DateTime oldDate = DateTime.MinValue;
+        private DateTime oldDate = DateTime.Now;
 
         public WindowPurchasesCurrence(PurchasesCurrenceLogic logic)
         {
@@ -53,10 +53,8 @@ namespace YouBankruptSupplierView
                     })?[0];
                     if (view != null)
                     {
-                        CalendarPurcharense.DisplayDate = view.DateBuy;
-                        CalendarPurcharense.SelectedDate = view.DateBuy;
                         oldDate = view.DateBuy;
-                        Name = view.PurchasesName.ToString() ;
+                        Name = view.PurchasesName.ToString();
                         purchasesCurrences = view.Currenses;
                     }
                 }
@@ -69,16 +67,6 @@ namespace YouBankruptSupplierView
             else
             {
                 purchasesCurrences = new Dictionary<int, (string, int)>();
-                CalendarPurcharense.SelectedDate = DateTime.Now;
-            }
-            var list = logic.GetPickDate(new PurchasesCurrenceBindingModel
-            {
-                DateBuy = CalendarPurcharense.SelectedDate.Value
-            });
-            
-            if (oldDate != DateTime.MinValue)
-            {
-                list.Add(oldDate);
             }
             LoadData();
         }
@@ -184,9 +172,9 @@ namespace YouBankruptSupplierView
 
         private void buttonSave_Click(object sender, RoutedEventArgs e)
         {
-            if (CalendarPurcharense.SelectedDate == null)
+            if (string.IsNullOrEmpty(textBoxName.Text))
             {
-                MessageBox.Show("Заполните дату", "Ошибка", MessageBoxButton.OK,
+                MessageBox.Show("Заполните name", "Ошибка", MessageBoxButton.OK,
                MessageBoxImage.Error);
                 return;
             }
@@ -201,7 +189,7 @@ namespace YouBankruptSupplierView
                 logic.CreateOrUpdate(new PurchasesCurrenceBindingModel
                 {
                     Id = id,
-                    DateBuy = ((DateTime)CalendarPurcharense.SelectedDate),
+                    DateBuy  = DateTime.Now,
                     PurchasesName = textBoxName.Text.ToString(),
                     Currenses = purchasesCurrences,
                     SupplierId = supplierId
@@ -222,34 +210,6 @@ namespace YouBankruptSupplierView
         {
             this.DialogResult = false;
             Close();
-        }
-
-        /// <summary>
-        /// Логика обработки смены даты в календаре
-        /// </summary>
-        private void CalendarPurcharense_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (!CalendarPurcharense.SelectedDate.HasValue)
-            {
-                return;
-            }
-            if (CalendarPurcharense.SelectedDate.Value < DateTime.Today)
-            {
-                MessageBox.Show("Выберете корректную дату", "Ошибка", MessageBoxButton.OK,
-               MessageBoxImage.Error);
-                CalendarPurcharense.SelectedDate = DateTime.Now;
-                return;
-            }
-
-            CalendarPurcharense.DisplayDate = CalendarPurcharense.SelectedDate.Value;
-            var list = logic.GetPickDate(new PurchasesCurrenceBindingModel
-            {
-                DateBuy = CalendarPurcharense.SelectedDate.Value
-            });
-            if (oldDate != DateTime.MinValue && oldDate.Day == CalendarPurcharense.SelectedDate.Value.Day)
-            {
-                list.Add(oldDate);
-            }
         }
 
         /// <summary>

@@ -30,7 +30,7 @@ namespace YouBankruptSupplierView
         }
         private int? id;
         public string CurrenceName { get { return (ComboBoxCurrences.SelectedItem as CurrenceViewModel).CurrenceName; } }
-        public string Count { get { return Count; } }
+        public int Count { get { return Convert.ToInt32(textBoxCount.Text); } set { textBoxCount.Text = value.ToString(); } }
 
         public int SupplierId { set { supplierId = value; } }
 
@@ -54,7 +54,7 @@ namespace YouBankruptSupplierView
                MessageBoxImage.Error);
                 return;
             }
-            if (textBoxCount.Text == null)
+            if (string.IsNullOrEmpty(textBoxCount.Text))
             {
                 MessageBox.Show("Укажите кол-во закупки валюты", "Ошибка", MessageBoxButton.OK,
                MessageBoxImage.Error);

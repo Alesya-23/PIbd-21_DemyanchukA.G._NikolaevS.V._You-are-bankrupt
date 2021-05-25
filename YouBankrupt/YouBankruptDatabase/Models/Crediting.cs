@@ -15,5 +15,9 @@ namespace YouBankruptDatabaseImplements.Models
 
         [ForeignKey("TransactionWithClientId")]
         public int? TransactionWithCustomerId { get; set; }
+
+        [ForeignKey("CreditingId")]
+        public virtual List<CreditingCurrence> Currences { get; set; }
+
     }
 }

@@ -36,7 +36,7 @@ namespace YouBankruptSupplierView
             currentContainer.RegisterType<CreditProgramLogic>(new
             HierarchicalLifetimeManager());
             //валюта
-            currentContainer.RegisterType<IPurcharesCurrenceStorage, CurrenceStorage>(new
+            currentContainer.RegisterType<ICurrenceStorage, CurrenceStorage>(new
             HierarchicalLifetimeManager());
             currentContainer.RegisterType<CurrenceLogic>(new
             HierarchicalLifetimeManager());

@@ -9,7 +9,7 @@ using YouBankruptDatabaseImplements.Models;
 
 namespace YouBankruptDatabaseImplements.Implements
 {
-    public class CurrenceStorage : IPurcharesCurrenceStorage
+    public class CurrenceStorage : ICurrenceStorage
     {
         public List<CurrenceViewModel> GetFullList()
         {

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace YouBankruptBusinessLogic.HelperModels
 {
-    public class WordInfo
+    public class WordInfoSupplier
     {
         public string FileName { get; set; }
         public string Title { get; set; }

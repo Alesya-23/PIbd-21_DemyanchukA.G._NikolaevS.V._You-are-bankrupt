@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using YouBankruptDatabaseImplements;
 
 namespace YouBankruptDatabaseImplements.Migrations
 {
     [DbContext(typeof(YouBankruptDatabase))]
-    partial class YouBankruptDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20210521002512_SumCurrensePurcharenceCurrenceChange")]
+    partial class SumCurrensePurcharenceCurrenceChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,28 +86,6 @@ namespace YouBankruptDatabaseImplements.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Creditings");
-                });
-
-            modelBuilder.Entity("YouBankruptDatabaseImplements.Models.CreditingCurrence", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CreditingId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CurrenceId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CreditingId");
-
-                    b.HasIndex("CurrenceId");
-
-                    b.ToTable("CreditingCurrence");
                 });
 
             modelBuilder.Entity("YouBankruptDatabaseImplements.Models.Currence", b =>
@@ -279,21 +259,6 @@ namespace YouBankruptDatabaseImplements.Migrations
 
                     b.HasOne("YouBankruptDatabaseImplements.Models.Currence", "Currence")
                         .WithMany("CreditProgramCurrences")
-                        .HasForeignKey("CurrenceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("YouBankruptDatabaseImplements.Models.CreditingCurrence", b =>
-                {
-                    b.HasOne("YouBankruptDatabaseImplements.Models.Crediting", "Crediting")
-                        .WithMany("Currences")
-                        .HasForeignKey("CreditingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("YouBankruptDatabaseImplements.Models.Currence", "Currence")
-                        .WithMany("Crediting")
                         .HasForeignKey("CurrenceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

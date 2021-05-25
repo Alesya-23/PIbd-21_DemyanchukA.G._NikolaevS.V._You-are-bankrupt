@@ -9,13 +9,13 @@ using YouBankruptBusinessLogic.HelperModels;
 
 namespace YouBankruptBusinessLogic.BusinessLogics
 {
-    public static class SaveToWord
+    public static class SaveToWordSupplier
     {
         /// <summary>
         /// Создание документа
         /// </summary>
         /// <param name="info"></param>
-        public static void CreateDoc(WordInfo info)
+        public static void CreateDoc(WordInfoSupplier info)
         {
             using (WordprocessingDocument wordDocument =
            WordprocessingDocument.Create(info.FileName, WordprocessingDocumentType.Document))
@@ -23,10 +23,10 @@ namespace YouBankruptBusinessLogic.BusinessLogics
                 MainDocumentPart mainPart = wordDocument.AddMainDocumentPart();
                 mainPart.Document = new Document();
                 Body docBody = mainPart.Document.AppendChild(new Body());
-                docBody.AppendChild(CreateParagraph(new WordParagraph
+                docBody.AppendChild(CreateParagraph(new WordParagraphSupplier
                 {
-                    Texts = new List<(string, WordTextProperties)> { (info.Title, new WordTextProperties { Bold = true, Size = "24", }) },
-                    TextProperties = new WordTextProperties
+                    Texts = new List<(string, WordTextPropertiesSupplier)> { (info.Title, new WordTextPropertiesSupplier { Bold = true, Size = "24", }) },
+                    TextProperties = new WordTextPropertiesSupplier
                     {
                         Size = "24",
                         JustificationValues = JustificationValues.Center
@@ -70,7 +70,7 @@ namespace YouBankruptBusinessLogic.BusinessLogics
         /// </summary>
         /// <param name="paragraph"></param>
         /// <returns></returns>
-        private static Paragraph CreateParagraph(WordParagraph paragraph)
+        private static Paragraph CreateParagraph(WordParagraphSupplier paragraph)
         {
             if (paragraph != null)
             {
@@ -104,7 +104,7 @@ namespace YouBankruptBusinessLogic.BusinessLogics
         /// </summary>
         /// <param name="paragraphProperties"></param>
         /// <returns></returns>
-        private static ParagraphProperties CreateParagraphProperties(WordTextProperties
+        private static ParagraphProperties CreateParagraphProperties(WordTextPropertiesSupplier
        paragraphProperties)
         {
             if (paragraphProperties != null)

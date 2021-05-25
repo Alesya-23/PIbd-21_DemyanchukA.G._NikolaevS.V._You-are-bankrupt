@@ -22,6 +22,8 @@ namespace YouBankruptDatabaseImplements.Models
 
         [ForeignKey("CurrenceId")]
         public virtual List<PurchasesCurrenceCurrence> PurchasesCurrenceCurrences { get; set; }
+        [ForeignKey("CurrenceId")]
+        public virtual List<CreditingCurrence> Crediting { get; set; }
 
         public virtual Supplier Supplier { get; set; }
     }

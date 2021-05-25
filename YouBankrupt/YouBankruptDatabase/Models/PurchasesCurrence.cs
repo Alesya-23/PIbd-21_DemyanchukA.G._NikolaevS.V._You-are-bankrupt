@@ -18,9 +18,6 @@ namespace YouBankruptDatabaseImplements.Models
         [Required]
         public DateTime DateBuy { get; set; }
 
-        [Required]
-        public double Summ { get; set; }
-
         public virtual Supplier Supplier { get; set; }
 
         [ForeignKey("PurchasesCurrenseId")]

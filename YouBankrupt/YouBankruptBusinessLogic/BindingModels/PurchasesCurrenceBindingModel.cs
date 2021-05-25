@@ -14,7 +14,9 @@ namespace YouBankruptBusinessLogic.BindingModels
  
         public DateTime DateBuy { get; set; }
 
-        public double Summ { get; set; }
+        public DateTime? DateFrom { get; set; }
+
+        public DateTime? DateTo { get; set; }
 
         public Dictionary<int, (string, int)> Currenses { get; set; }
     }

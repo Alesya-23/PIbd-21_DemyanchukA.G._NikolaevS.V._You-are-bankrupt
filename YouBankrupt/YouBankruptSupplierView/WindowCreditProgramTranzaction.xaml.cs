@@ -14,103 +14,57 @@ using System.Windows.Shapes;
 using Unity;
 using YouBankruptBusinessLogic.BindingModels;
 using YouBankruptBusinessLogic.BusinessLogics;
-using YouBankruptBusinessLogic.ViewModels;
 
 namespace YouBankruptSupplierView
 {
     /// <summary>
-    /// Логика взаимодействия для PurchasesCurrencesCurrences.xaml
+    /// Логика взаимодействия для WindowCreditProgramTranzaction.xaml
     /// </summary>
-    public partial class WindowPurchasesCurrences : Window
+    public partial class WindowCreditProgramTranzaction : Window
     {
         [Dependency]
         public IUnityContainer Container { get; set; }
-        private readonly PurchasesCurrenceLogic logic;
-
         public int Id { set { id = value; } }
 
         private int? id;
 
-        public WindowPurchasesCurrences(PurchasesCurrenceLogic logic)
+        private readonly CreditProgramLogic logic;
+      //  private readonly  TransactionWithCustomerLogic tranzaction;
+        public WindowCreditProgramTranzaction(CreditProgramLogic creditProgramLogic )//, TransactionWithCustomerLogic transactionWithCustomer)
         {
             InitializeComponent();
-            this.logic = logic;
+            this.logic = creditProgramLogic;
+          //  this.tranzaction = transactionWithCustomer;
         }
 
         private void buttonAdd_Click(object sender, RoutedEventArgs e)
         {
-            var window = Container.Resolve<WindowPurchasesCurrence>();
-            window.SupplierId = (int)id;
-            if (window.ShowDialog().Value)
+            WindowCreditProgram form = Container.Resolve<WindowCreditProgram>();
+            form.SupplierId = (int)id;
+            if (form.ShowDialog().Value)
             {
                 LoadData();
             }
         }
 
-        private void buttonUpd_Click(object sender, RoutedEventArgs e)
-        {
-            if (dataGridPurchasesCurrences.SelectedCells.Count != 0)
-            {
-                var window = Container.Resolve<WindowPurchasesCurrence>();
-                var cellInfo = dataGridPurchasesCurrences.SelectedCells[0];
-                PurchasesCurrenceViewModel content = (PurchasesCurrenceViewModel)(cellInfo.Item);
-                window.Id = content.Id;
-                window.SupplierId = (int)id;
-                if (window.ShowDialog().Value)
-                {
-                    LoadData();
-                }
-
-            }
-        }
-
-        private void buttonDel_Click(object sender, RoutedEventArgs e)
-        {
-            if (dataGridPurchasesCurrences.SelectedCells.Count != 0)
-            {
-                var result = MessageBox.Show("Удалить запись", "Вопрос", MessageBoxButton.YesNo,
-               MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes)
-                {
-                    var cellInfo = dataGridPurchasesCurrences.SelectedCells[0];
-                    PurchasesCurrenceViewModel content = (PurchasesCurrenceViewModel)(cellInfo.Item);
-                    int id = content.Id;
-                    try
-                    {
-                        logic.Delete(new PurchasesCurrenceBindingModel { Id = id });
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK,
-                       MessageBoxImage.Error);
-                    }
-                    LoadData();
-                }
-            }
-        }
-
-        private void buttonRef_Click(object sender, RoutedEventArgs e)
-        {
-            LoadData();
-        }
-
-        private void WindowPurchasesCurrences_Loaded(object sender, RoutedEventArgs e)
+       
+        private void WindowCreditPrograms_Loaded(object sender, RoutedEventArgs e)
         {
             LoadData();
         }
         private void LoadData()
         {
 
-            var list = logic.Read(new PurchasesCurrenceBindingModel
+            var list = logic.Read(new CreditProgramBindingModel
             {
                 SupplierId = id
             });
             if (list != null)
             {
-                dataGridPurchasesCurrences.ItemsSource = list;
-                dataGridPurchasesCurrences.Columns[0].Visibility = Visibility.Hidden;
-                dataGridPurchasesCurrences.Columns[1].Visibility = Visibility.Hidden;
-                dataGridPurchasesCurrences.Columns[4].Visibility = Visibility.Hidden;
+                dataGridCreditProgramsTranzactions.ItemsSource = list;
+                dataGridCreditProgramsTranzactions.Columns[0].Visibility = Visibility.Hidden;
+                dataGridCreditProgramsTranzactions.Columns[1].Visibility = Visibility.Hidden;
+                dataGridCreditProgramsTranzactions.Columns[5].Visibility = Visibility.Hidden;
             }
         }
 
@@ -164,5 +118,9 @@ namespace YouBankruptSupplierView
             return null;
         }
 
+        private void ButtonBind_Click(object sender, RoutedEventArgs e)
+        {
+            //cоздается связка программа-сделка
+        }
     }
 }

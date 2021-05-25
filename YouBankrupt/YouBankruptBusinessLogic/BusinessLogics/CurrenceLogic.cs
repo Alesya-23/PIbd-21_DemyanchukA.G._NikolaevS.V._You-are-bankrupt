@@ -9,8 +9,8 @@ namespace YouBankruptBusinessLogic.BusinessLogics
 {
     public class CurrenceLogic
     {
-        private readonly IPurcharesCurrenceStorage _currenceStorage;
-        public CurrenceLogic(IPurcharesCurrenceStorage currenceStorage)
+        private readonly ICurrenceStorage _currenceStorage;
+        public CurrenceLogic(ICurrenceStorage currenceStorage)
         {
             _currenceStorage = currenceStorage;
         }

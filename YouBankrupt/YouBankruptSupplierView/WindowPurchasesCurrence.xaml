@@ -10,7 +10,7 @@
         <Style TargetType="Button">
             <Setter Property="MaxWidth" Value="120"/>
             <Setter Property="MaxHeight" Value="40"/>
-            <Setter Property="Background" Value="#A4B9CA"/>
+            <Setter Property="Background" Value="#6bdb6b"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="BorderBrush" Value="White"/>
             <Setter Property="FontSize" Value="15px"/>
@@ -18,8 +18,6 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -42,9 +40,7 @@
         <Button x:Name="buttonDel" Content="Удалить" Grid.Row="3" Grid.Column="3" Click="buttonDel_Click"/>
         <Button x:Name="buttonRef" Content="Обновить" Grid.Row="4" Grid.Column="3" Click="buttonRef_Click"/>
 
-        <Label Content="Дата закупки: " Grid.Column="4" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Calendar x:Name="CalendarPurcharense" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2" DisplayMode="Month" SelectionMode="SingleDate" SelectedDatesChanged="CalendarPurcharense_SelectedDatesChanged"
-                  IsTodayHighlighted="False"  />
+       
         <Button x:Name="buttonSave" Content="Сохранить" Grid.Row="4" Grid.Column="0" Click="buttonSave_Click" />
         <Button x:Name="buttonCancel" Content="Отменить" Grid.Row="4" Grid.Column="1" Click="buttonCancel_Click" />
 

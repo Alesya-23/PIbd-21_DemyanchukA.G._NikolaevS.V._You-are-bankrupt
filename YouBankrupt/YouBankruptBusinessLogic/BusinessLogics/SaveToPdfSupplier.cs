@@ -9,7 +9,7 @@ using YouBankruptBusinessLogic.HelperModels;
 
 namespace YouBankruptBusinessLogic.BusinessLogics
 {
-    public class SaveToPdf
+    public class SaveToPdfSupplier
     {
         public static void CreateDoc(PdfInfoSupplier info)
         {
