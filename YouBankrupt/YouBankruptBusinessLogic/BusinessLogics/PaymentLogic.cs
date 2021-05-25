@@ -7,7 +7,7 @@ using YouBankruptBusinessLogic.ViewModels;
 
 namespace YouBankruptBusinessLogic.BusinessLogic
 {
-    class PaymentLogic
+    public class PaymentLogic
     {
         private readonly IPaymentStorage _paymentStorage;
 
@@ -57,7 +57,7 @@ namespace YouBankruptBusinessLogic.BusinessLogic
             });
             if (element == null)
             {
-                throw new Exception("Клиент не найден");
+                throw new Exception("Выплата не найдена не найден");
             }
             _paymentStorage.Delete(model);
         }

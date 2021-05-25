@@ -14,10 +14,10 @@ namespace YouBankruptBusinessLogic.ViewModels
         [DisplayName("Сумма")]
         public int Sum { get; set; }
 
-        [DisplayName("№ Сделки")]
-        public int? TransactionWithCustomerId { get; set; }
-
         [DisplayName("Дата плтежа")]
         public DateTime? DatePayment { get; set; }
+
+        [DisplayName("Валюта")]
+        public string CurrenceName{ get; set; }
     }
 }

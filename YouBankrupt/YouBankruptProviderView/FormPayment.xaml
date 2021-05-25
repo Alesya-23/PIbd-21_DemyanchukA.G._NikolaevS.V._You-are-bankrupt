@@ -1,0 +1,19 @@
+﻿<Window x:Class="YouBankruptProviderView.FormPayment"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="FormPayment" Height="225" Width="166" Loaded="FormPayment_Loaded">
+    <Grid>
+        <TextBox x:Name="textBoxSum" HorizontalAlignment="Center" Margin="0,10,0,0" Text="Введите сумму" TextWrapping="Wrap" VerticalAlignment="Top" Width="124"/>
+        <Button   Content="Сохранить" HorizontalAlignment="Left" Margin="21,160,0,0" VerticalAlignment="Top" Width="60" Click="btnSave_Click"/>
+        <Button Content="Отменить" HorizontalAlignment="Left" Margin="86,160,0,0" VerticalAlignment="Top" Width="58"/>
+        <DatePicker x:Name="pickDate" HorizontalAlignment="Center" VerticalAlignment="Top" Width="124" Margin="0,130,0,0"/>
+        <ComboBox x:Name="comboBoxCurrence" HorizontalAlignment="Left" Margin="21,103,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Валюта" HorizontalAlignment="Left" Margin="21,80,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Закупка валюты" HorizontalAlignment="Left" Margin="21,26,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="comboBoxPurchases" HorizontalAlignment="Left" Margin="21,51,0,0" VerticalAlignment="Top" Width="120"/>
+
+    </Grid>
+</Window>

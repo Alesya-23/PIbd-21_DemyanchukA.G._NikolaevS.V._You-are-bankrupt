@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using YouBankruptBusinessLogic.BindingModels;
-using YouBankruptBusinessLogic.ViewModels;
 using YouBankruptBusinessLogic.Interfaces;
 using YouBankruptDatabaseImplements.Models;
+using YouBankruptDatabaseImplements;
+using YouBankruptBusinessLogic.ViewModels;
 
-namespace YouBankruptDatabaseImplements.Implements
+namespace YouBankruptDatabaseImplement.Implements
 {
     public class PaymentStorage : IPaymentStorage
     {
@@ -41,8 +42,8 @@ namespace YouBankruptDatabaseImplements.Implements
                 {
                     Id = payment.Id,
                     Sum = payment.Sum,
-                    TransactionWithCustomerId = payment.TransactionWithCustomerId,
-                    DatePayment = payment.DatePayment
+                    DatePayment = payment.DatePayment,
+                    CurrenceName = context.Currences.FirstOrDefault(recCurrnece => recCurrnece.Id == payment.CurrenceId).CurrenceName,
                 } :
                null;
             }
@@ -57,13 +58,14 @@ namespace YouBankruptDatabaseImplements.Implements
             using (var context = new YouBankruptDatabase())
             {
                 return context.Payments
-               .Select(rec => new PaymentViewModel
-               {
-                   Id = rec.Id,
-                   Sum = rec.Sum,
-                   TransactionWithCustomerId = rec.TransactionWithCustomerId,
-                   DatePayment = rec.DatePayment
-               })
+                .Where(rec => rec.CustomerId == model.CustomerId)
+                .Select(rec => new PaymentViewModel
+                {
+                    Id = rec.Id,
+                    Sum = rec.Sum,
+                    DatePayment = rec.DatePayment,
+                    CurrenceName = context.Currences.FirstOrDefault(recCurrnece => recCurrnece.Id == rec.CurrenceId).CurrenceName,
+                })
                 .ToList();
             }
         }
@@ -73,13 +75,13 @@ namespace YouBankruptDatabaseImplements.Implements
             using (var context = new YouBankruptDatabase())
             {
                 return context.Payments
-                .Select(rec => new PaymentViewModel
-                {
-                    Id = rec.Id,
-                    Sum = rec.Sum,
-                    TransactionWithCustomerId = rec.TransactionWithCustomerId,
-                    DatePayment = rec.DatePayment
-                })
+                    .Select(rec => new PaymentViewModel
+                    {
+                        Id = rec.Id,
+                        Sum = rec.Sum,
+                        DatePayment = rec.DatePayment,
+                        CurrenceName = context.Currences.FirstOrDefault(recCurrnece => recCurrnece.Id == rec.CurrenceId).CurrenceName,
+                    })
                .ToList();
             }
         }
@@ -110,8 +112,10 @@ namespace YouBankruptDatabaseImplements.Implements
         private Payment CreateModel(PaymentBindingModel model, Payment payment)
         {
             payment.Sum = model.Sum;
-            payment.TransactionWithCustomerId = model.TransactionWithCustomerId;
             payment.DatePayment = model.DatePayment;
+            payment.CustomerId = (int)model.CustomerId;
+            payment.CurrenceId = model.CurrenceId;
+            payment.PurchasesCurrenceId = model.PurchasesCurrenceId;
             return payment;
         }
     }
