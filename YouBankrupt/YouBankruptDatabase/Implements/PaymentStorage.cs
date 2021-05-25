@@ -5,7 +5,6 @@ using YouBankruptBusinessLogic.BindingModels;
 using YouBankruptBusinessLogic.Interfaces;
 using YouBankruptDatabaseImplements.Models;
 using YouBankruptDatabaseImplements;
-using Microsoft.EntityFrameworkCore;
 using YouBankruptBusinessLogic.ViewModels;
 
 namespace YouBankruptDatabaseImplement.Implements
@@ -43,7 +42,8 @@ namespace YouBankruptDatabaseImplement.Implements
                 {
                     Id = payment.Id,
                     Sum = payment.Sum,
-                    DatePayment = payment.DatePayment
+                    DatePayment = payment.DatePayment,
+                    CurrenceName = context.Currences.FirstOrDefault(recCurrnece => recCurrnece.Id == payment.CurrenceId).CurrenceName,
                 } :
                null;
             }
@@ -63,7 +63,8 @@ namespace YouBankruptDatabaseImplement.Implements
                 {
                     Id = rec.Id,
                     Sum = rec.Sum,
-                    DatePayment = rec.DatePayment
+                    DatePayment = rec.DatePayment,
+                    CurrenceName = context.Currences.FirstOrDefault(recCurrnece => recCurrnece.Id == rec.CurrenceId).CurrenceName,
                 })
                 .ToList();
             }
@@ -78,7 +79,8 @@ namespace YouBankruptDatabaseImplement.Implements
                     {
                         Id = rec.Id,
                         Sum = rec.Sum,
-                        DatePayment = rec.DatePayment
+                        DatePayment = rec.DatePayment,
+                        CurrenceName = context.Currences.FirstOrDefault(recCurrnece => recCurrnece.Id == rec.CurrenceId).CurrenceName,
                     })
                .ToList();
             }
@@ -112,6 +114,8 @@ namespace YouBankruptDatabaseImplement.Implements
             payment.Sum = model.Sum;
             payment.DatePayment = model.DatePayment;
             payment.CustomerId = (int)model.CustomerId;
+            payment.CurrenceId = model.CurrenceId;
+            payment.PurchasesCurrenceId = model.PurchasesCurrenceId;
             return payment;
         }
     }

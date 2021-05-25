@@ -15,6 +15,9 @@ namespace YouBankruptBusinessLogic.ViewModels
         [DisplayName("Дата выплаты")]
         public DateTime DateCredit { get; set; }
 
+        [DisplayName("Валюта")]
+        public string CurrenceName { get; set; }
+
         [DisplayName("Сумма")]
         public int Sum { get; set; }
 

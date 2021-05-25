@@ -11,6 +11,8 @@ namespace YouBankruptBusinessLogic.BindingModels
 
         public int? CustomerId { get; set; }
 
+        public int? CurrenceId { get; set; }
+
         public DateTime DateCredit { get; set; }
 
         public int Sum { get; set; }

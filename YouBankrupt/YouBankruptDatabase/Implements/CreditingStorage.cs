@@ -22,6 +22,8 @@ namespace YouBankruptDatabaseImplements.Implements
                 {
                     Id = rec.Id,
                     Sum = rec.Sum,
+                    CurrenceName = context.Currences.FirstOrDefault(recCurrence => recCurrence.Id == rec.CurrenceId).CurrenceName,
+                    CustomerId = (int)rec.CustomerId,
                 })
                .ToList();
             }
@@ -58,6 +60,7 @@ namespace YouBankruptDatabaseImplements.Implements
                 {
                     Id = creiting.Id,
                     Sum = creiting.Sum,
+                    CurrenceName = context.Currences.FirstOrDefault(recCurrence => recCurrence.Id == creiting.CurrenceId).CurrenceName,
                     CustomerId = (int)creiting.CustomerId,
                 } :
                null;
@@ -79,6 +82,7 @@ namespace YouBankruptDatabaseImplements.Implements
                     Id = rec.Id,
                     DateCredit = rec.DateCredit,
                     CustomerId = (int)rec.CustomerId,
+                    CurrenceName = context.Currences.FirstOrDefault(recCurrence => recCurrence.Id == rec.CurrenceId).CurrenceName,
                     Sum = rec.Sum,
                     //CreditPayments = rec.Payments.ToDictionary(recP => recP.Id, recDC => recDC.Sum),
                 })
@@ -130,6 +134,7 @@ namespace YouBankruptDatabaseImplements.Implements
             crediting.Sum = model.Sum;
             crediting.DateCredit = model.DateCredit;
             crediting.CustomerId = model.CustomerId;
+            crediting.CurrenceId = model.CurrenceId;
             if (model.Id.HasValue)
             {
 

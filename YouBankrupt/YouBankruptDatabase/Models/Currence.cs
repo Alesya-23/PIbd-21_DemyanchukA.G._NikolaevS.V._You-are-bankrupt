@@ -9,6 +9,7 @@ namespace YouBankruptDatabaseImplements.Models
     public class Currence
     {
         public int? Id { get; set; }
+
         public int? SupplierId { get; set; }
 
         [Required]
