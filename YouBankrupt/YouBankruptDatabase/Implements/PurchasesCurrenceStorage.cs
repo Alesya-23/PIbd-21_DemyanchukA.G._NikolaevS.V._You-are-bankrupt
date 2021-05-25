@@ -17,15 +17,16 @@ namespace YouBankruptDatabaseImplements.Implements
             using (var context = new YouBankruptDatabase())
             {
                 return context.PurchasesCurrences
+                     .Include(rec => rec.Supplier)
                 .Include(rec => rec.PurchasesCurrenceCurrences)
                .ThenInclude(rec => rec.Currence)
                .ToList()
                .Select(rec => new PurchasesCurrenceViewModel
                {
                    Id = (int)rec.Id,
+                   SupplierId = rec.SupplierId,
                    PurchasesName = rec.PurchasesName,
                    DateBuy = rec.DateBuy,
-                   Summ = rec.Summ,
                    Currenses = rec.PurchasesCurrenceCurrences
                 .ToDictionary(recPC => recPC.CurrenceId, recPC =>
                (recPC.Currence?.CurrenceName, recPC.Count))
@@ -42,19 +43,20 @@ namespace YouBankruptDatabaseImplements.Implements
             using (var context = new YouBankruptDatabase())
             {
                 return context.PurchasesCurrences
+                     .Include(rec => rec.Supplier)
                 .Include(rec => rec.PurchasesCurrenceCurrences)
                .ThenInclude(rec => rec.Currence)
-               .Where(rec => rec.PurchasesName.Contains(model.PurchasesName))
+               .Where( rec => rec.SupplierId == model.SupplierId)
                .ToList()
                .Select(rec => new PurchasesCurrenceViewModel
                {
                    Id = (int)rec.Id,
+                   SupplierId = rec.SupplierId,
                    PurchasesName = rec.PurchasesName,
                    DateBuy = rec.DateBuy,
-                   Summ = rec.Summ,
                    Currenses = rec.PurchasesCurrenceCurrences
                 .ToDictionary(recPC => recPC.CurrenceId, recPC =>
-               (recPC.Currence?.CurrenceName, recPC.Count))
+              (recPC.Currence?.CurrenceName, recPC.Count))
                })
                .ToList();
             }
@@ -68,6 +70,7 @@ namespace YouBankruptDatabaseImplements.Implements
             using (var context = new YouBankruptDatabase())
             {
                 var purchasesCurrence = context.PurchasesCurrences
+                     .Include(rec => rec.Supplier)
                 .Include(rec => rec.PurchasesCurrenceCurrences)
                .ThenInclude(rec => rec.Currence)
                .FirstOrDefault(rec => rec.PurchasesName == model.PurchasesName || rec.Id
@@ -76,12 +79,12 @@ namespace YouBankruptDatabaseImplements.Implements
                 new PurchasesCurrenceViewModel
                 {
                     Id = (int)purchasesCurrence.Id,
+                    SupplierId = purchasesCurrence.SupplierId,
                     PurchasesName = purchasesCurrence.PurchasesName,
                     DateBuy = purchasesCurrence.DateBuy,
-                    Summ = purchasesCurrence.Summ,
                     Currenses = purchasesCurrence.PurchasesCurrenceCurrences
                 .ToDictionary(recPC => recPC.CurrenceId, recPC =>
-               (recPC.Currence?.CurrenceName, recPC.Count))
+          (recPC.Currence?.CurrenceName, recPC.Count))
                 } :
                null;
             }
@@ -94,15 +97,7 @@ namespace YouBankruptDatabaseImplements.Implements
                 {
                     try
                     {
-                        PurchasesCurrence p = new PurchasesCurrence
-                        {
-                            PurchasesName = model.PurchasesName,
-                            DateBuy = model.DateBuy,
-                            Summ = model.Summ,
-                        };
-                        context.PurchasesCurrences.Add(p);
-                        context.SaveChanges();
-                        CreateModel(model, p, context);
+                        CreateModel(model, new PurchasesCurrence(), context);
                         context.SaveChanges();
                         transaction.Commit();
                     }
@@ -163,7 +158,12 @@ namespace YouBankruptDatabaseImplements.Implements
         {
             purchasesCurrence.PurchasesName = model.PurchasesName;
             purchasesCurrence.DateBuy = model.DateBuy;
-            purchasesCurrence.Summ = model.Summ;
+            purchasesCurrence.SupplierId = model.SupplierId;
+            if (purchasesCurrence.Id == null)
+            {
+                context.PurchasesCurrences.Add(purchasesCurrence);
+                context.SaveChanges();
+            }
             if (model.Id.HasValue)
             {
                 var purchasesCurrenceCurrence = context.PurchasesCurrenceCurrences.Where(rec =>

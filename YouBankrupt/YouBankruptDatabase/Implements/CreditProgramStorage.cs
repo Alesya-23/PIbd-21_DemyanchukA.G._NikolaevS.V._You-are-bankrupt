@@ -17,16 +17,21 @@ namespace YouBankruptDatabaseImplements.Implements
             using (var context = new YouBankruptDatabase())
             {
                 return context.CreditPrograms
+                .Include(rec => rec.Supplier)
                 .Include(rec => rec.CreditProgramCurrences)
-               .ThenInclude(rec => rec.Currence)
-               .ToList()
-               .Select(rec => new CreditProgramViewModel
-               {
-                   Id = (int)rec.Id,
-                   CreditProgramName = rec.CreditProgramName,
-                   Persent = rec.Persent,
-                   PaymentTerm = rec.PaymentTerm,
-               })
+                .ThenInclude(rec => rec.Currence)
+                .ToList()
+                .Select(rec => new CreditProgramViewModel
+                {
+                    Id = (int)rec.Id,
+                    SupplierId = (int)rec.SupplierId,
+                    CreditProgramName = rec.CreditProgramName,
+                    Persent = rec.Persent,
+                    PaymentTerm = rec.PaymentTerm,
+                    Currenses = rec.CreditProgramCurrences
+                .ToDictionary(recPC => recPC.CurrenceId, recPC =>
+               (recPC.Currence?.CurrenceName))
+                })
                .ToList();
             }
         }
@@ -39,16 +44,21 @@ namespace YouBankruptDatabaseImplements.Implements
             using (var context = new YouBankruptDatabase())
             {
                 return context.CreditPrograms
-                .Include(rec => rec.CreditProgramCurrences)
+               .Include(rec => rec.Supplier)
+               .Include(rec => rec.CreditProgramCurrences)
                .ThenInclude(rec => rec.Currence)
-               .Where(rec => rec.CreditProgramName.Contains(model.CreditProgramName))
+               .Where(rec => rec.SupplierId == model.SupplierId)
                .ToList()
                .Select(rec => new CreditProgramViewModel
                {
                    Id = (int)rec.Id,
+                   SupplierId = (int)rec.SupplierId,
                    CreditProgramName = rec.CreditProgramName,
                    Persent = rec.Persent,
-                   PaymentTerm = rec.PaymentTerm
+                   PaymentTerm = rec.PaymentTerm,
+                   Currenses = rec.CreditProgramCurrences
+                .ToDictionary(recPC => recPC.CurrenceId, recPC =>
+               (recPC.Currence?.CurrenceName))
                })
                .ToList();
             }
@@ -62,7 +72,8 @@ namespace YouBankruptDatabaseImplements.Implements
             using (var context = new YouBankruptDatabase())
             {
                 var credit = context.CreditPrograms
-                .Include(rec => rec.CreditProgramCurrences)
+               .Include(rec => rec.Supplier)
+               .Include(rec => rec.CreditProgramCurrences)
                .ThenInclude(rec => rec.Currence)
                .FirstOrDefault(rec => rec.CreditProgramName == model.CreditProgramName || rec.Id
                == model.Id);
@@ -70,9 +81,13 @@ namespace YouBankruptDatabaseImplements.Implements
                 new CreditProgramViewModel
                 {
                     Id = (int)credit.Id,
+                    SupplierId = (int)credit.SupplierId,
                     CreditProgramName = credit.CreditProgramName,
                     Persent = credit.Persent,
                     PaymentTerm = credit.PaymentTerm,
+                    Currenses = credit.CreditProgramCurrences
+                .ToDictionary(recPC => recPC.CurrenceId, recPC =>
+               (recPC.Currence?.CurrenceName))
                 } :
                null;
             }
@@ -85,15 +100,7 @@ namespace YouBankruptDatabaseImplements.Implements
                 {
                     try
                     {
-                        CreditProgram p = new CreditProgram
-                        {
-                            CreditProgramName = model.CreditProgramName,
-                            Persent = model.Persent,
-                            PaymentTerm = model.PaymentTerm
-                        };
-                        context.CreditPrograms.Add(p);
-                        context.SaveChanges();
-                        CreateModel(model, p, context);
+                        CreateModel(model, new CreditProgram(), context);
                         context.SaveChanges();
                         transaction.Commit();
                     }
@@ -153,31 +160,36 @@ namespace YouBankruptDatabaseImplements.Implements
        YouBankruptDatabase context)
         {
             creditProgram.CreditProgramName = model.CreditProgramName;
+            creditProgram.SupplierId = model.SupplierId;
             creditProgram.Persent = model.Persent;
             creditProgram.PaymentTerm = model.PaymentTerm;
-            if (model.Id.HasValue)
+            if (creditProgram.Id == null)
             {
-                var creditProgramCurrence = context.CreditProgramCurrences.Where(rec =>
-               rec.CreditProgramId == model.Id.Value).ToList();
-                // удалили те, которых нет в модели
-                context.CreditProgramCurrences.RemoveRange(creditProgramCurrence.Where(rec =>
-               !model.Currenses.ContainsKey(rec.CurrenceId)).ToList());
-                context.SaveChanges();
-                // обновили количество у существующих записей
-                foreach (var updateCurrence in creditProgramCurrence)
-                {
-                    //updateCurrence.Count = model.Currenses[updateCurrence.CurrenceId].Item2;
-                    model.Currenses.Remove(updateCurrence.CurrenceId);
-                }
+                context.CreditPrograms.Add(creditProgram);
                 context.SaveChanges();
             }
+            if (model.Id.HasValue)
+            {
+                var CreditProgramCurrence = context.CreditProgramCurrences.Where(rec => rec.CreditProgramId == model.Id.Value).ToList();
+                context.CreditProgramCurrences.RemoveRange(CreditProgramCurrence.Where(rec =>
+                !model.Currenses.ContainsKey(rec.CurrenceId)).ToList());
+
+                foreach (var updateCurrence in CreditProgramCurrence)
+                {
+                    model.Currenses.Remove(updateCurrence.CurrenceId);
+                }
+
+                context.SaveChanges();
+
+            }
             // добавили новые
-            foreach (var pc in model.Currenses)
+            foreach (var pp in model.Currenses)
             {
                 context.CreditProgramCurrences.Add(new CreditProgramCurrence
                 {
                     CreditProgramId = (int)creditProgram.Id,
-                    CurrenceId = pc.Key,
+                    CurrenceId = pp.Key,
+
                 });
                 context.SaveChanges();
             }

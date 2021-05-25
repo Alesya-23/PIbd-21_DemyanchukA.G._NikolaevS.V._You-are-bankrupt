@@ -11,13 +11,11 @@ namespace YouBankruptDatabaseImplements.Models
         public int Id { get; set; }
 
         [Required]
-        public int Sum { get; set; }
+        public int? CustomerId { get; set; }
 
         [Required]
+        public int Sum { get; set; }
+
         public DateTime? DatePayment { get; set; }
-
-        public int CustomerId { get; set; }
-
-        public virtual Customer Customer { get; set; }
     }
 }

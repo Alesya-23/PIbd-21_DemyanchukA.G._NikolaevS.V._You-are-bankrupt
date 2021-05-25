@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace YouBankruptDatabaseImplements.Models
@@ -17,5 +18,14 @@ namespace YouBankruptDatabaseImplements.Models
 
         [Required]
         public string Password { get; set; }
+
+        [ForeignKey("SupplierId")]
+        public List<Currence> Currences { get; set; }
+
+        [ForeignKey("SupplierId")]
+        public List<CreditProgram> CreditPrograms { get; set; }
+
+        [ForeignKey("SupplierId")]
+        public List<PurchasesCurrence> PurchasesCurrences { get; set; }
     }
 }

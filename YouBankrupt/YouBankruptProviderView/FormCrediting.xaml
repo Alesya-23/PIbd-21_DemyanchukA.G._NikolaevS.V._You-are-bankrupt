@@ -1,17 +1,22 @@
-﻿<Window x:Class="YouBankruptCustomerView.FormCrediting"
+﻿<Window x:Class="YouBankruptProviderView.FormCrediting"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:YouBankruptCustomerView"
+        xmlns:local="clr-namespace:YouBankruptProviderView"
         mc:Ignorable="d"
-        Title="FormCrediting" Height="450" Width="800">
+        Title="FormCrediting" Height="393" Width="294" Loaded="FormCrediting_Loaded">
     <Grid>
-        <DataGrid Margin="10,10,200,10">
-        </DataGrid>
-        <Button Content="Добавить" HorizontalAlignment="Left" Margin="605,10,0,0" VerticalAlignment="Top" Height="87" Width="185"/>
-        <Button Content="Удалить" HorizontalAlignment="Left" Margin="605,118,0,0" VerticalAlignment="Top" Height="87" Width="185"/>
-        <Button Content="Изменить" HorizontalAlignment="Left" Margin="605,228,0,0" VerticalAlignment="Top" Height="87" Width="185"/>
-        <Button Content="Обновить" HorizontalAlignment="Left" Margin="605,336,0,0" VerticalAlignment="Top" Height="87" Width="185"/>
+        <DatePicker x:Name="datePickerDateCrediting" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox  x:Name="textBoxSum" HorizontalAlignment="Left" Margin="10,10,0,0" Text="Сумма" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnAdd" Content="Добавить" HorizontalAlignment="Left" Margin="219,94,0,0" VerticalAlignment="Top" Click="btnAdd_Click"/>
+        <Button x:Name="btnUpd" Content="Изменить" HorizontalAlignment="Left" Margin="219,129,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnRef" Content="Обновть" HorizontalAlignment="Left" Margin="219,170,0,0" VerticalAlignment="Top" Width="57"/>
+        <Button x:Name="btnDel" Content="Удалить" HorizontalAlignment="Left" Margin="219,207,0,0" VerticalAlignment="Top" Width="57"/>
+        <DataGrid x:Name="dataGridPayments" Margin="0,94,95,54"/>
+        <Label Content="Выплаты для погашения кредита" HorizontalAlignment="Left" Margin="8,65,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnSave" Content="Сохранить" HorizontalAlignment="Left" Margin="11,339,0,0" VerticalAlignment="Top" Click="btnSave_Click"/>
+        <Button x:Name="btnCancle" Content="Отмена" HorizontalAlignment="Left" Margin="212,339,0,0" VerticalAlignment="Top"/>
+
     </Grid>
 </Window>

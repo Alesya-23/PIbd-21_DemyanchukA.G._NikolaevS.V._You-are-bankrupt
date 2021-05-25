@@ -59,5 +59,6 @@ namespace YouBankruptBusinessLogic.BusinessLogics
             }
             _purchasesCurrenceStorage.Delete(model);
         }
+       
     }
 }

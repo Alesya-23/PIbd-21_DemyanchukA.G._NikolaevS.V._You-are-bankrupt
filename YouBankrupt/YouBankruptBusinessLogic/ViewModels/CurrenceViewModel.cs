@@ -10,6 +10,8 @@ namespace YouBankruptBusinessLogic.ViewModels
     {
         public int Id { get; set; }
 
+        public int? SupplierId { get; set; }
+
         [DisplayName("Название валюты")]    
         public string CurrenceName { get; set; }
 
