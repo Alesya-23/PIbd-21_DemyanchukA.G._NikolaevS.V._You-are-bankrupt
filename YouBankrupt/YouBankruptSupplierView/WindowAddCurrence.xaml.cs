@@ -28,7 +28,9 @@ namespace YouBankruptSupplierView
             get { return (ComboBoxCurrences.SelectedItem as CurrenceViewModel).Id; }
             set { id = value; }
         }
+
         private int? id;
+        
         public string CurrenceName { get { return (ComboBoxCurrences.SelectedItem as CurrenceViewModel).CurrenceName; } }
       
         public int SupplierId { set { supplierId = value; } }

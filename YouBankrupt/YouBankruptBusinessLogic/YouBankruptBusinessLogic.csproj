@@ -4,10 +4,4 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="DocumentFormat.OpenXml" Version="2.12.3" />
-    <PackageReference Include="PDFsharp-MigraDoc" Version="1.50.5147" />
-    <PackageReference Include="Unity" Version="5.11.10" />
-  </ItemGroup>
-
 </Project>
