@@ -8,7 +8,7 @@ using YouBankruptBusinessLogic.HelperModels;
 
 namespace YouBankruptBusinessLogic.BusinessLogics
 {
-    public static class SaveToExcel
+    public static class SaveToExelSupplier
     {
         public static void CreateDoc(ExcelInfoSupplier info)
         {

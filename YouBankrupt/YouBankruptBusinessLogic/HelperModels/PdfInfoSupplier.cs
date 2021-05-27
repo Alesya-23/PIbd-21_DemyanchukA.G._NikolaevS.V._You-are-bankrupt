@@ -15,6 +15,6 @@ namespace YouBankruptBusinessLogic.HelperModels
 
         public DateTime DateTo { get; set; }
 
-        public List<ReportPurhacesCurrenseByTransactionViewModel> PurchasesCurreces { get; set; }
+        public List<ReportPurharenceViewModel> PurchasesCurreces { get; set; }
     }
 }

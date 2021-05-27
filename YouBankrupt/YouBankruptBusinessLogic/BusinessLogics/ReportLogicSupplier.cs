@@ -33,38 +33,38 @@ namespace YouBankruptBusinessLogic.BusinessLogics
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public List<ReportPercharesViewModel> GetPurchares(ReportBindingModelSupplier model)
+        public List<ReportPurharenceViewModel> GetPurchares(ReportBindingModelSupplier model)
         {
-            var listAll = new List<ReportPercharesViewModel>();
-            var supplier = _supplierStorage.GetElement(new SupplierBindingModel { Id = model.SupplierId });
+            var listAll = new List<ReportPurharenceViewModel>();
+            //var supplier = _supplierStorage.GetElement(new SupplierBindingModel { Id = model.SupplierId });
 
 
-            var listPurchases = _purchasesCurrence.GetFilteredList(new PurchasesCurrenceBindingModel { SupplierId = model.SupplierId, DateFrom = model.DateFrom, DateTo = model.DateTo });
-            foreach (var purchase in listPurchases)
-            {
-                foreach (var pp in purchase.Currenses)
-                {
-                    listAll.Add(new ReportPercharesViewModel
-                    {
-                        Date = purchase.DateBuy,
-                        CurrenceName = pp.Value.Item1,
-                        Count = pp.Value.Item2
-                    });
-                }
-            }
-            var listCreditings = _creditingStorage.GetFilteredList(new CreditingBindingModel { SupplierId = model.SupplierId, DateFrom = model.DateFrom, DateTo = model.DateTo });
-            foreach (var visit in listCreditings)
-            {
-                foreach (var vp in visit.)
-                {
-                    listAll.Add(new ReportPercharesViewModel
-                    {
-                        TypeOfService = "Посещение",
-                        DateOfService = visit.Date,
-                        ProcedureName = vp.Value,
-                    });
-                }
-            }
+            //var listPurchases = _purchasesCurrence.GetFilteredList(new PurchasesCurrenceBindingModel { SupplierId = model.SupplierId, DateFrom = model.DateFrom, DateTo = model.DateTo });
+            //foreach (var purchase in listPurchases)
+            //{
+            //    foreach (var pp in purchase.Currenses)
+            //    {
+            //        listAll.Add(new ReportPercharesViewModel
+            //        {
+            //            Date = purchase.DateBuy,
+            //            CurrenceName = pp.Value.Item1,
+            //            Count = pp.Value.Item2
+            //        });
+            //    }
+            //}
+            //var listCreditings = _creditingStorage.GetFilteredList(new CreditingBindingModel { SupplierId = model.SupplierId, DateFrom = model.DateFrom, DateTo = model.DateTo });
+            //foreach (var visit in listCreditings)
+            //{
+            //    foreach (var vp in visit.CreditPayments)
+            //    {
+            //        listAll.Add(new ReportPercharesViewModel
+            //        {
+            //            TypeOfService = "Посещение",
+            //            DateOfService = visit.Date,
+            //            ProcedureName = vp.Value,
+            //        });
+            //    }
+            //}
             return listAll;
         }
 
@@ -81,22 +81,22 @@ namespace YouBankruptBusinessLogic.BusinessLogics
             foreach (var credit in listCrediting)
             {
                 //выбрать список платежей
-                foreach (var vp in credit.)
+                foreach (var pay in credit.CreditPayments)
                 {
-                    if (vp.Value == model.CurrenceName)
+                    if (pay.Value == model.CurrenceId)
                     {
-                        var listPayment = _paymentStorage.GetFilteredList(new PaymentBindingModel { CreditingId = credit.Id });
+                        var listPayment = _paymentStorage.GetFilteredList(new PaymentBindingModel { CreditId = credit.Id});
                         if (listPayment.Count > 0 && listPayment != null)
                         {
                             foreach (var payment in listPayment)
                             {
                                 list.Add(new ReportCurrencePaymentViewModel
-                                { 
+                                {
                                     //нужен ли мне тут остаток??
-                                    CurrenceName = vp.Value,
+                                    CurrenceName = credit.CurrenceName,
                                     Date = (DateTime)payment.DatePayment,
                                     Cost = payment.Sum,
-                                    CreditingId = payment.CreditingId
+                                    CreditingId = credit.Id
                                 });
 
                             }
@@ -112,26 +112,26 @@ namespace YouBankruptBusinessLogic.BusinessLogics
         /// Сохранение покупок в файл-Word
         /// </summary>
         /// <param name="model"></param>
-        public void SavePurchaseListToWordFile(ReportBindingModelSupplier model, string name)
+        public void SavePurchaseListToWordFile(ReportBindingModelSupplier model, string name, int id)
         {
             SaveToWordSupplier.CreateDoc(new WordInfoSupplier
             {
                 FileName = model.FileName,
                 Title = "Сведения по выдачам",
-                Payments = GetPaymentList(new ReportCurrencePaymentBindingModel { CurrenceName = name })
+                Payments = GetPaymentList(new ReportCurrencePaymentBindingModel { CurrenceName = name, CurrenceId = id })
             });
         }
         /// <summary>
         /// Сохранение покупок в файл-Excel
         /// </summary>
         /// <param name="model"></param>
-        public void SavePurchaseListToExcelFile(ReportBindingModelSupplier model, string name)
+        public void SavePurchaseListToExcelFile(ReportBindingModelSupplier model, string name, int id)
         {
-            SaveToExcelSupplier.CreateDoc(new ExcelInfoSupplier
+            SaveToExelSupplier.CreateDoc(new ExcelInfoSupplier
             {
                 FileName = model.FileName,
                 Title = "Сведения по выдачам",
-                Payments = GetPaymentList(new ReportCurrencePaymentBindingModel { CurrenceName = name })
+                Payments = GetPaymentList(new ReportCurrencePaymentBindingModel { CurrenceName = name, CurrenceId = id })
             });
         }
         /// <summary>
@@ -145,7 +145,8 @@ namespace YouBankruptBusinessLogic.BusinessLogics
                 FileName = model.FileName,
                 Title = "Список закупок, связанных с платами",
                 DateFrom = model.DateFrom.Value,
-                // Purhareses = GetPurchares(model)
+                DateTo = model.DateTo.Value,
+                PurchasesCurreces = GetPurchares(model)
             });
         }
     }

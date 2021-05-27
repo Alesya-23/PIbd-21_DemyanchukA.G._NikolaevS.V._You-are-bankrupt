@@ -4,15 +4,15 @@ using System.Text;
 
 namespace YouBankruptBusinessLogic.ViewModels
 {
-    public class ReportPercharesViewModel
+    public class ReportPurharenceViewModel
     {
-
+        //для отчеть и почты
         public DateTime Date { get; set; }
 
         public string CurrenceName { get; set; }
 
         public double Count { get; set; }
 
-        public string Number { get; set; }
+        public int CreditingId { get; set; }
     }
 }

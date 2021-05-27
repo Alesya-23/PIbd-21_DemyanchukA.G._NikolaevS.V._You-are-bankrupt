@@ -4,4 +4,16 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="DocumentFormat.OpenXml" Version="2.12.3" />
+    <PackageReference Include="EPP.PresentationCore" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Data.Tools.Msbuild" Version="16.0.62003.5180" />
+    <PackageReference Include="Microsoft.Report.Viewer" Version="11.0.0" />
+    <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.Winforms" Version="150.1449.0" />
+    <PackageReference Include="PDFsharp-MigraDoc-WPF" Version="1.50.5147" />
+    <PackageReference Include="PresentationFramework" Version="4.6.0" />
+    <PackageReference Include="WindowsBase_Core.STW" Version="4.0.30319.1" />
+    <PackageReference Include="WindowsFormsGenericHost" Version="0.2.0" />
+  </ItemGroup>
+
 </Project>

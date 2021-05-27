@@ -60,12 +60,14 @@ namespace YouBankruptSupplierView
 
         private void GetListItemClick(object sender, RoutedEventArgs e)
         {
-
+            WindowListPurcharense form = Container.Resolve<WindowListPurcharense>();
+            form.Show();
         }
 
         private void GetReportItemClick(object sender, RoutedEventArgs e)
         {
-
+            WindowReport form = Container.Resolve<WindowReport>();
+            form.Show();
         }
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {

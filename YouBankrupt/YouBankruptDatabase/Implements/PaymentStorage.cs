@@ -115,6 +115,7 @@ namespace YouBankruptDatabaseImplement.Implements
             payment.DatePayment = model.DatePayment;
             payment.CustomerId = (int)model.CustomerId;
             payment.CurrenceId = model.CurrenceId;
+            payment.CreditId = model.CreditId;
             payment.PurchasesCurrenceId = model.PurchasesCurrenceId;
             return payment;
         }

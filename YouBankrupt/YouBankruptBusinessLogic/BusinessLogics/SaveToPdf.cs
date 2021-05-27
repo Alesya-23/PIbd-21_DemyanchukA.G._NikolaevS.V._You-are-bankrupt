@@ -1,10 +1,5 @@
-﻿using AbstractInstallationSoftBusinessLogic.HelperModels;
-using MigraDoc.DocumentObjectModel;
+﻿using MigraDoc.DocumentObjectModel;
 using MigraDoc.DocumentObjectModel.Tables;
-using MigraDoc.Rendering;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using YouBankruptBusinessLogic.HelperModels;
 
 namespace YouBankruptBusinessLogic.BusinessLogics

@@ -6,6 +6,7 @@ namespace YouBankruptBusinessLogic.ViewModels
 {
     public class ReportCurrencePaymentViewModel
     {
+        //для списка в доке и кселе
         public string CurrenceName { get; set; }
 
         public DateTime Date { get; set; }
