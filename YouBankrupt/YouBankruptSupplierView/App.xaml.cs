@@ -50,6 +50,7 @@ namespace YouBankruptSupplierView
             HierarchicalLifetimeManager());
             currentContainer.RegisterType<SupplierLogic>(new
             HierarchicalLifetimeManager());
+            currentContainer.RegisterType<ReportLogicSupplier>(new HierarchicalLifetimeManager());
 
             return currentContainer;
         }

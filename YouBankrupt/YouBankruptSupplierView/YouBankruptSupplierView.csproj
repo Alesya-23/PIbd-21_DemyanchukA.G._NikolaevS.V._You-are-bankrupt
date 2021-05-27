@@ -4,6 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,7 +23,8 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Report.Viewer" Version="11.0.0" />
-    <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.Winforms" Version="150.1449.0" />
+    <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.WebForms" Version="150.1449.0" />
+    <PackageReference Include="Microsoft.ReportViewer.VS2015.WinForms" Version="12.0.2.2402" />
     <PackageReference Include="NETStandard.Library" Version="2.0.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="PDFsharp-MigraDoc" Version="1.50.5147" />
@@ -37,6 +39,10 @@
     <ProjectReference Include="..\YouBankruptBusinessLogic\YouBankruptBusinessLogic.csproj" />
     <ProjectReference Include="..\YouBankruptDatabase\YouBankruptDatabaseImplements.csproj" />
     <ProjectReference Include="..\YouBankruptProviderView\YouBankruptProviderView.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>

@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:YouBankruptSupplierView" xmlns:wfr="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"
+        xmlns:wfr="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="WindowReport" Height="550" Width="800">
     <Window.Resources>
@@ -46,8 +47,7 @@
         <Button x:Name="buttonMake" Content="Сформировать" Grid.Row="0" Grid.Column="2" Click="buttonMake_Click"/>
         <Button x:Name="buttonToPdf" Content="Отправить на почту" Grid.Row="0" Grid.Column="4" Click="buttonToPdf_Click" MaxWidth="150"/>
         <TextBox x:Name="TextBoxEmail" Grid.Row="0" Grid.Column="3" Foreground="#FF003466" CaretBrush="#FF003466" MinWidth="120" VerticalAlignment="Center" HorizontalAlignment="Center" MinHeight="40" Text="Введите email" FontSize="15" AcceptsTab="True" MouseDoubleClick="TextBoxEmail_MouseDoubleClick"/>
-
-        <WindowsFormsHost Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="6">
+        <WindowsFormsHost  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="6">
             <wfr:ReportViewer x:Name="reportViewer" ProcessingMode="Local" Load="ReportViewer_Load"></wfr:ReportViewer>
         </WindowsFormsHost>
     </Grid>
