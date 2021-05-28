@@ -18,12 +18,16 @@ namespace YouBankruptDatabaseImplements.Implements
             using (var context = new YouBankruptDatabase())
             {
                 return context.Creditings
+                .Include(rec=> rec.Payments ).ToList()
                 .Select(rec => new CreditingViewModel
                 {
                     Id = rec.Id,
                     Sum = rec.Sum,
                     CurrenceName = context.Currences.FirstOrDefault(recCurrence => recCurrence.Id == rec.CurrenceId).CurrenceName,
                     CustomerId = (int)rec.CustomerId,
+                    DateCredit = rec.DateCredit,
+                    CreditPayments = rec.Payments.ToDictionary(recP => recP.Id, recDC => recDC.Sum),
+                    CurrenceId = (int)rec.CurrenceId,
                 })
                .ToList();
             }
@@ -62,6 +66,7 @@ namespace YouBankruptDatabaseImplements.Implements
                     Sum = creiting.Sum,
                     CurrenceName = context.Currences.FirstOrDefault(recCurrence => recCurrence.Id == creiting.CurrenceId).CurrenceName,
                     CustomerId = (int)creiting.CustomerId,
+                    CreditPayments = context.Payments.ToDictionary(recP => recP.Id, recDC => recDC.Sum),
                 } :
                null;
             }

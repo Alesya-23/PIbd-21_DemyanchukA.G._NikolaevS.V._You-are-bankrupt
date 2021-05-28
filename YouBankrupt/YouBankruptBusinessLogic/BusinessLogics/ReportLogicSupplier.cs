@@ -80,27 +80,20 @@ namespace YouBankruptBusinessLogic.BusinessLogics
 
             foreach (var credit in listCrediting)
             {
-                //выбрать список платежей
-                foreach (var pay in credit.CreditPayments)
+
+                if (credit.CurrenceId == model.CurrenceId)
                 {
-                    if (pay.Value == model.CurrenceId)
-                    {
-                        var listPayment = _paymentStorage.GetFilteredList(new PaymentBindingModel { CreditId = credit.Id});
-                        if (listPayment.Count > 0 && listPayment != null)
-                        {
-                            foreach (var payment in listPayment)
-                            {
+                    //выбрать список платежей
+                    foreach (var pay in credit.CreditPayments)
+                {
+                        var listPayment = _paymentStorage.GetElement(new PaymentBindingModel { Id = pay.Key });
                                 list.Add(new ReportCurrencePaymentViewModel
                                 {
-                                    //нужен ли мне тут остаток??
                                     CurrenceName = credit.CurrenceName,
-                                    Date = (DateTime)payment.DatePayment,
-                                    Cost = payment.Sum,
+                                    Date = (DateTime)listPayment.DatePayment,
+                                    Cost = pay.Value,
                                     CreditingId = credit.Id
                                 });
-
-                            }
-                        }
                     }
                 }
             }
@@ -118,7 +111,7 @@ namespace YouBankruptBusinessLogic.BusinessLogics
             {
                 FileName = model.FileName,
                 Title = "Сведения по выдачам",
-                Payments = GetPaymentList(new ReportCurrencePaymentBindingModel { CurrenceName = name, CurrenceId = id })
+                reportCurrencePayments = GetPaymentList(new ReportCurrencePaymentBindingModel { CurrenceName = name, CurrenceId = id })
             });
         }
         /// <summary>
@@ -131,7 +124,7 @@ namespace YouBankruptBusinessLogic.BusinessLogics
             {
                 FileName = model.FileName,
                 Title = "Сведения по выдачам",
-                Payments = GetPaymentList(new ReportCurrencePaymentBindingModel { CurrenceName = name, CurrenceId = id })
+                reportCurrencePayments = GetPaymentList(new ReportCurrencePaymentBindingModel { CurrenceName = name, CurrenceId = id })
             });
         }
         /// <summary>

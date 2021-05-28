@@ -6,6 +6,32 @@
         xmlns:local="clr-namespace:YouBankruptSupplierView"
         mc:Ignorable="d"
         Title="Закупки валюты" Height="422" Width="709" Loaded="WindowPurchasesCurrences_Loaded">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="MaxWidth" Value="120"/>
+            <Setter Property="MaxHeight" Value="40"/>
+            <Setter Property="Background" Value="#6bdb6b"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="FontSize" Value="15px"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#2bb52b "/>
+            <Setter Property="BorderBrush" Value="#2bb52b "/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="FontSize" Value="15px"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#2bb52b"/>
+            <Setter Property="FontSize" Value="15px"/>
+        </Style>
+    </Window.Resources>
     <Grid Margin="0,0,15,10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="131*"/>

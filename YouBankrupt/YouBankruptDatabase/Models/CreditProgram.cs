@@ -23,6 +23,10 @@ namespace YouBankruptDatabaseImplements.Models
         [ForeignKey("CreditProgramId")]
         public virtual List<CreditProgramCurrence> CreditProgramCurrences { get; set; }
 
+        public int? TranzactionId { get; set; }
+
+        public virtual Transaction Transaction { get; set; }
+
         public virtual Supplier Supplier { get; set; }
 
     }

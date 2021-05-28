@@ -11,6 +11,7 @@ namespace YouBankruptBusinessLogic.ViewModels
         public int Id { get; set; }
 
         public int CustomerId { get; set; }
+        public int CurrenceId { get; set; }
 
         [DisplayName("Дата выплаты")]
         public DateTime DateCredit { get; set; }

@@ -41,38 +41,46 @@ namespace YouBankruptSupplierView
         {
             WindowCreditPrograms form = Container.Resolve<WindowCreditPrograms>();
             form.Id = (int)id;
-            form.Show();
+            form.ShowDialog();
         }
 
         private void CurrenceItemClick(object sender, RoutedEventArgs e)
         {
             WindowCurrences form = Container.Resolve<WindowCurrences>();
             form.Id = (int)id;
-            form.Show();
+            form.ShowDialog();
         }
 
         private void PurcharenseCurrenceItemClick(object sender, RoutedEventArgs e)
         {
             WindowPurchasesCurrences form = Container.Resolve<WindowPurchasesCurrences>();
            form.Id = (int)id;
-            form.Show();
+            form.ShowDialog();
         }
 
         private void GetListItemClick(object sender, RoutedEventArgs e)
         {
             WindowListPurcharense form = Container.Resolve<WindowListPurcharense>();
-            form.Show();
+            form.SupplierId = (int)id;
+            form.ShowDialog();
         }
 
         private void GetReportItemClick(object sender, RoutedEventArgs e)
         {
-            WindowReport form = Container.Resolve<WindowReport>();
-            form.Show();
+            //WindowReport form = Container.Resolve<WindowReport>();
+            //form.ShowDialog();
         }
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             var supplier = logic.Read(new SupplierBindingModel { Id = id })?[0];
             labelSupplier.Content = "Клиент: " + supplier.SupplierFullName;
+        }
+
+        private void GetBindClick(object sender, RoutedEventArgs e)
+        {
+            WindowCreditProgramTranzaction form = Container.Resolve<WindowCreditProgramTranzaction>();
+            form.SupplierId = (int)id;
+            form.ShowDialog();
         }
     }
 }

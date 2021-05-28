@@ -60,7 +60,45 @@ namespace YouBankruptBusinessLogic.BusinessLogics
                     CellToName = "C1"
                 });
                 uint rowIndex = 2;
-                foreach (var pc in info.Payments)
+                InsertCellInWorksheet(new ExcelCellParameters
+                {
+                    Worksheet = worksheetPart.Worksheet,
+                    ShareStringPart = shareStringPart,
+                    ColumnName = "A",
+                    RowIndex = rowIndex,
+                    Text = "Дата",
+                    StyleIndex = 1U
+                });
+                InsertCellInWorksheet(new ExcelCellParameters
+                {
+                    Worksheet = worksheetPart.Worksheet,
+                    ShareStringPart = shareStringPart,
+                    ColumnName = "B",
+                    RowIndex = rowIndex,
+                    Text = "Валюта",
+                    StyleIndex = 1U
+                });
+                InsertCellInWorksheet(new ExcelCellParameters
+                {
+                    Worksheet = worksheetPart.Worksheet,
+                    ShareStringPart = shareStringPart,
+                    ColumnName = "C",
+                    RowIndex = rowIndex,
+                    Text = "Сумма",
+                    StyleIndex = 1U
+                });
+                InsertCellInWorksheet(new ExcelCellParameters
+                {
+                    Worksheet = worksheetPart.Worksheet,
+                    ShareStringPart = shareStringPart,
+                    ColumnName = "D",
+                    RowIndex = rowIndex,
+                    Text = "Id выплаты",
+                    StyleIndex = 1U
+                });
+
+                rowIndex++;
+                foreach (var pc in info.reportCurrencePayments)
                 {
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
@@ -68,42 +106,36 @@ namespace YouBankruptBusinessLogic.BusinessLogics
                         ShareStringPart = shareStringPart,
                         ColumnName = "A",
                         RowIndex = rowIndex,
+                        Text = pc.Date.ToString(),
+                        StyleIndex = 1U
+                    });
+                    InsertCellInWorksheet(new ExcelCellParameters
+                    {
+                        Worksheet = worksheetPart.Worksheet,
+                        ShareStringPart = shareStringPart,
+                        ColumnName = "B",
+                        RowIndex = rowIndex,
                         Text = pc.CurrenceName,
-                        StyleIndex = 0U
+                        StyleIndex = 1U
+                    }); InsertCellInWorksheet(new ExcelCellParameters
+                    {
+                        Worksheet = worksheetPart.Worksheet,
+                        ShareStringPart = shareStringPart,
+                        ColumnName = "C",
+                        RowIndex = rowIndex,
+                        Text = pc.Cost.ToString(),
+                        StyleIndex = 1U
+                    });
+                    InsertCellInWorksheet(new ExcelCellParameters
+                    {
+                        Worksheet = worksheetPart.Worksheet,
+                        ShareStringPart = shareStringPart,
+                        ColumnName = "D",
+                        RowIndex = rowIndex,
+                        Text = pc.CreditingId.ToString(),
+                        StyleIndex = 1U
                     });
                     rowIndex++;
-                    //foreach (var package in pc.Components)
-                    //{
-                    //    InsertCellInWorksheet(new ExcelCellParameters
-                    //    {
-                    //        Worksheet = worksheetPart.Worksheet,
-                    //        ShareStringPart = shareStringPart,
-                    //        ColumnName = "B",
-                    //        RowIndex = rowIndex,
-                    //        Text = package.Item1,
-                    //        StyleIndex = 1U
-                    //    });
-                    //    InsertCellInWorksheet(new ExcelCellParameters
-                    //    {
-                    //        Worksheet = worksheetPart.Worksheet,
-                    //        ShareStringPart = shareStringPart,
-                    //        ColumnName = "C",
-                    //        RowIndex = rowIndex,
-                    //        Text = package.Item2.ToString(),
-                    //        StyleIndex = 1U
-                    //    });
-                    //    rowIndex++;
-                    //}
-                    //InsertCellInWorksheet(new ExcelCellParameters
-                    //{
-                    //    Worksheet = worksheetPart.Worksheet,
-                    //    ShareStringPart = shareStringPart,
-                    //    ColumnName = "C",
-                    //    RowIndex = rowIndex,
-                    //    Text = pc.TotalCount.ToString(),
-                    //    StyleIndex = 0U
-                    //});
-                    //rowIndex++;
                 }
                 workbookpart.Workbook.Save();
             }

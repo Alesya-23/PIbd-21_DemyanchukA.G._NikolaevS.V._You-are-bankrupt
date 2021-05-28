@@ -8,6 +8,8 @@ namespace YouBankruptBusinessLogic.BindingModels
     {
         public int? Id { get; set; }
 
+        public int? TranzactionId { get; set; }
+
         public int? SupplierId { get; set; }
 
         public string CreditProgramName { get; set; }

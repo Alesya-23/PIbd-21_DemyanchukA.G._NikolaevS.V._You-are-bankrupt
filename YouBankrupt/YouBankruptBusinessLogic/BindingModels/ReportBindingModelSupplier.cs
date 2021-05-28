@@ -13,5 +13,6 @@ namespace YouBankruptBusinessLogic.BindingModels
         public DateTime? DateTo { get; set; }
 
         public int? SupplierId { get; set; }
+        
     }
 }

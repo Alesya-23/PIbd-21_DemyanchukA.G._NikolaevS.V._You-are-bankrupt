@@ -9,7 +9,6 @@ namespace YouBankruptBusinessLogic.HelperModels
     {
         public string FileName { get; set; }
         public string Title { get; set; }
-
-        public List<ReportCurrencePaymentViewModel> Payments { get; set; }
+        public List<ReportCurrencePaymentViewModel> reportCurrencePayments { get; set; }
     }
 }

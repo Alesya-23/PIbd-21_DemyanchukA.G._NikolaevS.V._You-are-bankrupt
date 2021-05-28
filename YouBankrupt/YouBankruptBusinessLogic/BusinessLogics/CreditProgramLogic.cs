@@ -9,9 +9,11 @@ namespace YouBankruptBusinessLogic.BusinessLogics
 {
     public class CreditProgramLogic
     { private readonly ICreditProgramStorage creditProgramStoarage;
-        public CreditProgramLogic(ICreditProgramStorage creditProgramStorage)
+     private readonly ITransactionStorage transactionStorage;
+        public CreditProgramLogic(ICreditProgramStorage creditProgramStorage, ITransactionStorage transaction)
         {
             creditProgramStoarage = creditProgramStorage;
+            transactionStorage = transaction ;
         }
         public List<CreditProgramViewModel> Read(CreditProgramBindingModel model)
         {
@@ -56,6 +58,46 @@ namespace YouBankruptBusinessLogic.BusinessLogics
                 throw new Exception("Элемент не найден");
             }
             creditProgramStoarage.Delete(model);
+        }
+
+
+        public void Linking(CreditProgramLinkingBindingModel model)
+        {
+            var crediting = creditProgramStoarage.GetElement(new CreditProgramBindingModel
+            {
+                Id = model.CreditingProgramId
+            });
+
+            var transaction = transactionStorage.GetElement(new TransactionBindingModel
+            {
+                Id = model.TransactionId
+            });
+
+            if (crediting == null)
+            {
+                throw new Exception("Не найдена программа");
+            }
+
+            if (transaction == null)
+            {
+                throw new Exception("Не найдена сделка");
+            }
+
+            if (crediting.TranzactionId.HasValue)
+            {
+                throw new Exception("Данная сделка уже привязана к кредитной программе");
+            }
+
+            creditProgramStoarage.Update(new CreditProgramBindingModel
+            {
+                Id = crediting.Id,
+                CreditProgramName = crediting.CreditProgramName,
+                Persent = crediting.Persent,
+                PaymentTerm = crediting.PaymentTerm,
+                Currenses = crediting.Currenses,
+                SupplierId = crediting.SupplierId,
+               TranzactionId = model.TransactionId
+            });
         }
     }
 }

@@ -13,7 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Unity;
 using YouBankruptBusinessLogic.BindingModels;
+using YouBankruptBusinessLogic.BusinessLogic;
 using YouBankruptBusinessLogic.BusinessLogics;
+using YouBankruptBusinessLogic.ViewModels;
 
 namespace YouBankruptSupplierView
 {
@@ -24,95 +26,73 @@ namespace YouBankruptSupplierView
     {
         [Dependency]
         public IUnityContainer Container { get; set; }
-        public int Id { set { id = value; } }
 
-        private int? id;
+        public int TransactionId
+        {
+            get { return (int)(ComboBoxTranzaction.SelectedItem as TransactionViewModel).Id; }
+            set { ComboBoxTranzaction.SelectedItem = SetValueTransaction(value); }
+        }
 
-        private readonly CreditProgramLogic logic;
-      //  private readonly  TransactionWithCustomerLogic tranzaction;
-        public WindowCreditProgramTranzaction(CreditProgramLogic creditProgramLogic )//, TransactionWithCustomerLogic transactionWithCustomer)
+        public int CreditProgramId
+        {
+            get { return (ComboBoxCreditProgram.SelectedItem as CreditProgramViewModel).Id; }
+            set { ComboBoxCreditProgram.SelectedItem = SetValueCreditProgram(value); }
+        }
+
+        public int SupplierId { set { supplierId = value; } }
+
+        private int? supplierId;
+
+        private readonly TransactionLogic logicTransaction;
+
+        private readonly CreditProgramLogic logicCreditProgram;
+
+        public WindowCreditProgramTranzaction(TransactionLogic logicTransaction, CreditProgramLogic logicCreditProgram)
         {
             InitializeComponent();
-            this.logic = creditProgramLogic;
-          //  this.tranzaction = transactionWithCustomer;
+            this.logicTransaction = logicTransaction;
+            this.logicCreditProgram = logicCreditProgram;
         }
 
-        private void buttonAdd_Click(object sender, RoutedEventArgs e)
+        private void WindowBindingReciept_Loaded(object sender, RoutedEventArgs e)
         {
-            WindowCreditProgram form = Container.Resolve<WindowCreditProgram>();
-            form.SupplierId = (int)id;
-            if (form.ShowDialog().Value)
+            var listTransaction = logicTransaction.Read(null);
+            if (logicTransaction != null)
             {
-                LoadData();
+                ComboBoxTranzaction.ItemsSource = listTransaction;
+            }
+            var listCreditProgram = logicCreditProgram.Read(new CreditProgramBindingModel { SupplierId = supplierId });
+            if (listCreditProgram != null)
+            {
+                ComboBoxCreditProgram.ItemsSource = listCreditProgram;
             }
         }
 
-       
-        private void WindowCreditPrograms_Loaded(object sender, RoutedEventArgs e)
+        private void buttonCancel_Click(object sender, RoutedEventArgs e)
         {
-            LoadData();
-        }
-        private void LoadData()
-        {
-
-            var list = logic.Read(new CreditProgramBindingModel
-            {
-                SupplierId = id
-            });
-            if (list != null)
-            {
-                dataGridCreditProgramsTranzactions.ItemsSource = list;
-                dataGridCreditProgramsTranzactions.Columns[0].Visibility = Visibility.Hidden;
-                dataGridCreditProgramsTranzactions.Columns[1].Visibility = Visibility.Hidden;
-                dataGridCreditProgramsTranzactions.Columns[5].Visibility = Visibility.Hidden;
-            }
+            DialogResult = false;
+            Close();
         }
 
-        /// <summary>
-        /// Данные для привязки DisplayName к названиям столбцов
-        /// </summary>
-        private void DataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        private TransactionViewModel SetValueTransaction(int value)
         {
-            string displayName = GetPropertyDisplayName(e.PropertyDescriptor);
-            if (!string.IsNullOrEmpty(displayName))
+            foreach (var item in ComboBoxTranzaction.Items)
             {
-                e.Column.Header = displayName;
-            }
-            new DataGridLength(1, DataGridLengthUnitType.Star); // честно я хз, но вроде это растягивает последний столбец до полной ширины
-
-        }
-        /// <summary>
-        /// метод привязки DisplayName к названию столбца
-        /// </summary>
-        public static string GetPropertyDisplayName(object descriptor)
-        {
-
-            PropertyDescriptor pd = descriptor as PropertyDescriptor;
-            if (pd != null)
-            {
-                // Check for DisplayName attribute and set the column header accordingly
-                DisplayNameAttribute displayName = pd.Attributes[typeof(DisplayNameAttribute)] as DisplayNameAttribute;
-                if (displayName != null && displayName != DisplayNameAttribute.Default)
+                if ((item as TransactionViewModel).Id == value)
                 {
-                    return displayName.DisplayName;
+                    return item as TransactionViewModel;
                 }
-
             }
-            else
+            return null;
+        }
+
+        private CreditProgramViewModel SetValueCreditProgram(int value)
+        {
+            foreach (var item in ComboBoxCreditProgram.Items)
             {
-                PropertyInfo pi = descriptor as PropertyInfo;
-                if (pi != null)
+                if ((item as CreditProgramViewModel).Id == value)
                 {
-                    // Check for DisplayName attribute and set the column header accordingly
-                    Object[] attributes = pi.GetCustomAttributes(typeof(DisplayNameAttribute), true);
-                    for (int i = 0; i < attributes.Length; ++i)
-                    {
-                        DisplayNameAttribute displayName = attributes[i] as DisplayNameAttribute;
-                        if (displayName != null && displayName != DisplayNameAttribute.Default)
-                        {
-                            return displayName.DisplayName;
-                        }
-                    }
+                    return item as CreditProgramViewModel;
                 }
             }
             return null;
@@ -120,7 +100,31 @@ namespace YouBankruptSupplierView
 
         private void ButtonBind_Click(object sender, RoutedEventArgs e)
         {
-            //cоздается связка программа-сделка
+            if (ComboBoxCreditProgram.SelectedValue == null)
+            {
+                MessageBox.Show("Выберите программу", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (ComboBoxTranzaction.SelectedValue == null)
+            {
+                MessageBox.Show("Выберите сделку", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            try
+            {
+                logicCreditProgram.Linking(new CreditProgramLinkingBindingModel
+                {
+                    CreditingProgramId = (int)(ComboBoxCreditProgram.SelectedItem as CreditProgramViewModel).Id,
+                    TransactionId = (int)(ComboBoxTranzaction.SelectedItem as TransactionViewModel).Id
+                });
+                MessageBox.Show("Привязка прошла успешно", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                DialogResult = false;
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

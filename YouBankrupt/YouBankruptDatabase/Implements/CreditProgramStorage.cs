@@ -18,6 +18,7 @@ namespace YouBankruptDatabaseImplements.Implements
             {
                 return context.CreditPrograms
                 .Include(rec => rec.Supplier)
+                .Include(rec => rec.Transaction)
                 .Include(rec => rec.CreditProgramCurrences)
                 .ThenInclude(rec => rec.Currence)
                 .ToList()
@@ -28,6 +29,7 @@ namespace YouBankruptDatabaseImplements.Implements
                     CreditProgramName = rec.CreditProgramName,
                     Persent = rec.Persent,
                     PaymentTerm = rec.PaymentTerm,
+                    TranzactionId = rec.TranzactionId,
                     Currenses = rec.CreditProgramCurrences
                 .ToDictionary(recPC => recPC.CurrenceId, recPC =>
                (recPC.Currence?.CurrenceName))
@@ -45,6 +47,7 @@ namespace YouBankruptDatabaseImplements.Implements
             {
                 return context.CreditPrograms
                .Include(rec => rec.Supplier)
+                .Include(rec => rec.Transaction)
                .Include(rec => rec.CreditProgramCurrences)
                .ThenInclude(rec => rec.Currence)
                .Where(rec => rec.SupplierId == model.SupplierId)
@@ -56,6 +59,7 @@ namespace YouBankruptDatabaseImplements.Implements
                    CreditProgramName = rec.CreditProgramName,
                    Persent = rec.Persent,
                    PaymentTerm = rec.PaymentTerm,
+                   TranzactionId = rec.TranzactionId,
                    Currenses = rec.CreditProgramCurrences
                 .ToDictionary(recPC => recPC.CurrenceId, recPC =>
                (recPC.Currence?.CurrenceName))
@@ -73,6 +77,7 @@ namespace YouBankruptDatabaseImplements.Implements
             {
                 var credit = context.CreditPrograms
                .Include(rec => rec.Supplier)
+                .Include(rec => rec.Transaction)
                .Include(rec => rec.CreditProgramCurrences)
                .ThenInclude(rec => rec.Currence)
                .FirstOrDefault(rec => rec.CreditProgramName == model.CreditProgramName || rec.Id
@@ -85,6 +90,7 @@ namespace YouBankruptDatabaseImplements.Implements
                     CreditProgramName = credit.CreditProgramName,
                     Persent = credit.Persent,
                     PaymentTerm = credit.PaymentTerm,
+                    TranzactionId = credit.TranzactionId,
                     Currenses = credit.CreditProgramCurrences
                 .ToDictionary(recPC => recPC.CurrenceId, recPC =>
                (recPC.Currence?.CurrenceName))
@@ -161,6 +167,7 @@ namespace YouBankruptDatabaseImplements.Implements
         {
             creditProgram.CreditProgramName = model.CreditProgramName;
             creditProgram.SupplierId = model.SupplierId;
+            creditProgram.TranzactionId = model.TranzactionId;
             creditProgram.Persent = model.Persent;
             creditProgram.PaymentTerm = model.PaymentTerm;
             if (creditProgram.Id == null)

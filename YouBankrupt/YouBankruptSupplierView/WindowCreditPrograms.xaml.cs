@@ -109,7 +109,8 @@ namespace YouBankruptSupplierView
                 dataGridCreditPrograms.ItemsSource = list;
                 dataGridCreditPrograms.Columns[0].Visibility = Visibility.Hidden;
                 dataGridCreditPrograms.Columns[1].Visibility = Visibility.Hidden;
-                dataGridCreditPrograms.Columns[5].Visibility = Visibility.Hidden;
+                dataGridCreditPrograms.Columns[2].Visibility = Visibility.Hidden;
+                dataGridCreditPrograms.Columns[6].Visibility = Visibility.Hidden;
             }
         }
 

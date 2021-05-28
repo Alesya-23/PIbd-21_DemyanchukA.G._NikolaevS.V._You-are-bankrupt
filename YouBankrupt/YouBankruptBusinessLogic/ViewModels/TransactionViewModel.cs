@@ -22,5 +22,6 @@ namespace YouBankruptBusinessLogic.ViewModels
         public string CreditProgramName { get; set; }
 
         public int? CreditingId { get; set; }
+        public int? CreditProgramId { get; set; }
     }
 }

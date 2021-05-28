@@ -10,6 +10,7 @@ namespace YouBankruptBusinessLogic.ViewModels
         public int? Id { get; set; }
 
         public int? CustomerId { get; set; }
+        public int? CurrenceId { get; set; }
         public int? CreditId { get; set; }
 
         [DisplayName("Сумма")]

@@ -15,6 +15,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Unity;
+using YouBankruptBusinessLogic.BindingModels;
+using YouBankruptBusinessLogic.BusinessLogics;
+using YouBankruptBusinessLogic.ViewModels;
 
 namespace YouBankruptSupplierView
 {
@@ -24,141 +27,123 @@ namespace YouBankruptSupplierView
     public partial class WindowListPurcharense : Window
     {
         [Dependency]
-        public new IUnityContainer Container { get; set; }
+        public IUnityContainer Container { get; set; }
 
-        MedicineLogic logicM;
-        PatientReportLogic logicP;
-        List<MedicineViewModel> list = new List<MedicineViewModel>();
-        public WindowListPurcharense(PatientReportLogic _logicP, MedicineLogic _logicM)
+        private readonly ReportLogicSupplier report;
+
+        public int Id
+        {
+            get { return (ComboBoxCurrences.SelectedItem as CurrenceViewModel).Id; }
+            set { id = value; }
+        }
+
+        private int? id;
+        public string CurrenceName { get { return (ComboBoxCurrences.SelectedItem as CurrenceViewModel).CurrenceName; } }
+        public int SupplierId { set { supplierId = value; } }
+
+        private int? supplierId;
+
+        private readonly CurrenceLogic logic;
+
+        public WindowListPurcharense(ReportLogicSupplier logicSupplier, CurrenceLogic currenceLogic)
         {
             InitializeComponent();
-            logicM = _logicM;
-            logicP = _logicP;
+            report = logicSupplier;
+            logic = currenceLogic;
         }
 
-        private void LoadData()
+        private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
-            try
+
+            if (ComboBoxCurrences.SelectedValue == null)
             {
-                if (list != null)
-                {
-                    DataGridView.ItemsSource = list;
-                    DataGridView.Columns[0].Visibility = Visibility.Hidden;
-                    DataGridView.Columns[4].Visibility = Visibility.Hidden;
-                    DataGridView.Items.Refresh();
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK,
+                MessageBox.Show("Выберите валюту", "Ошибка", MessageBoxButton.OK,
                MessageBoxImage.Error);
+                return;
             }
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            LoadData();
-        }
-
-        private void Add_Click(object sender, RoutedEventArgs e)
-        {
-            var window = Container.Resolve<AddMedicine>();
-            window.ShowDialog();
-            if (window.DialogResult == true)
-            {
-                if (!list.Contains(logicM.Read(new MedicineBindingModel { Id = window.Id })[0]))
-                {
-                    list.Add(logicM.Read(new MedicineBindingModel { Id = window.Id })[0]);
-                    LoadData();
-                }
-            }
-        }
-
-        private void SaveToWord_Click(object sender, RoutedEventArgs e)
-        {
-            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
-            {
-                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    try
-                    {
-                        logicP.SaveToWordFile(dialog.FileName, list);
-                        System.Windows.MessageBox.Show("Выполнено", "Успех", MessageBoxButton.OK,
-                            MessageBoxImage.Information);
-                    }
-                    catch (Exception ex)
-                    {
-                        System.Windows.MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK,
-                       MessageBoxImage.Error);
-                    }
-                }
-            }
-        }
-
-        private void SaveToExcel_Click(object sender, RoutedEventArgs e)
-        {
-            using (var dialog = new SaveFileDialog { Filter = "xlsx|*.xlsx" })
-            {
-                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    try
-                    {
-                        logicP.SaveToExcelFile(dialog.FileName, list);
-                        System.Windows.MessageBox.Show("Выполнено", "Успех", MessageBoxButton.OK,
-                        MessageBoxImage.Information);
-                    }
-                    catch (Exception ex)
-                    {
-                        System.Windows.MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK,
-                       MessageBoxImage.Error);
-                    }
-                }
-            }
-        }
-
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-        {
+            this.DialogResult = true;
             Close();
         }
 
-
-        private void DataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
-            string displayName = GetPropertyDisplayName(e.PropertyDescriptor);
-            if (!string.IsNullOrEmpty(displayName))
-            {
-                e.Column.Header = displayName;
-            }
+            this.DialogResult = false;
+            Close();
         }
 
-        public static string GetPropertyDisplayName(object descriptor)
+        private CurrenceViewModel SetValue(int value)
         {
-            PropertyDescriptor pd = descriptor as PropertyDescriptor;
-            if (pd != null)
+            foreach (var item in ComboBoxCurrences.Items)
             {
-                DisplayNameAttribute displayName = pd.Attributes[typeof(DisplayNameAttribute)] as DisplayNameAttribute;
-                if (displayName != null && displayName != DisplayNameAttribute.Default)
+                if ((item as CurrenceViewModel).Id == value)
                 {
-                    return displayName.DisplayName;
-                }
-            }
-            else
-            {
-                PropertyInfo pi = descriptor as PropertyInfo;
-                if (pi != null)
-                {
-                    Object[] attributes = pi.GetCustomAttributes(typeof(DisplayNameAttribute), true);
-                    for (int i = 0; i < attributes.Length; ++i)
-                    {
-                        DisplayNameAttribute displayName = attributes[i] as DisplayNameAttribute;
-                        if (displayName != null && displayName != DisplayNameAttribute.Default)
-                        {
-                            return displayName.DisplayName;
-                        }
-                    }
+                    return item as CurrenceViewModel;
                 }
             }
             return null;
+        }
+
+        private void WindowBindingCurrence_Loaded(object sender, RoutedEventArgs e)
+        {
+            var list = logic.Read(new CurrenceBindingModel
+            {
+                SupplierId = supplierId
+            });
+            if (list != null)
+            {
+                ComboBoxCurrences.ItemsSource = list;
+            }
+            if (id != null)
+            {
+                ComboBoxCurrences.SelectedItem = SetValue(id.Value);
+                id = null;
+            }
+        }
+
+        private void buttonWord_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new SaveFileDialog();
+            dialog.Filter = "docx|*.docx";
+            if ((bool)dialog.ShowDialog())
+            {
+                try
+                {
+                    report.SavePurchaseListToWordFile(new ReportBindingModelSupplier { FileName = dialog.FileName, SupplierId = id }, CurrenceName, Id );
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            DialogResult = true;
+            Close();
+        }
+
+        private void buttonExcel_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new SaveFileDialog();
+            dialog.Filter = "xlsx|*.xlsx";
+            if ((bool)dialog.ShowDialog())
+            {
+                try
+                {
+                    report.SavePurchaseListToExcelFile(new ReportBindingModelSupplier { FileName = dialog.FileName, SupplierId = id }, CurrenceName, Id);
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                DialogResult = true;
+                Close();
+            }
+        }
+
+        private void buttonCancel_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+            Close();
         }
     }
 }

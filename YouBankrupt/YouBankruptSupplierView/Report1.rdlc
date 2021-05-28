@@ -398,7 +398,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Sum(Fields!Count.Value, "DataSetPurcharence")</Value>
+                <Value EvaluationMode="Constant" />
                 <Style />
               </TextRun>
             </TextRuns>

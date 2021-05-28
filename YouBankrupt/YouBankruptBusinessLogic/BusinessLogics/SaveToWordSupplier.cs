@@ -5,6 +5,7 @@ using DocumentFormat.OpenXml.Wordprocessing;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace YouBankruptBusinessLogic.BusinessLogics
 {
@@ -31,21 +32,112 @@ namespace YouBankruptBusinessLogic.BusinessLogics
                         JustificationValues = JustificationValues.Center
                     }
                 }));
-                //if (info.Packages != null)
-                //    foreach (var package in info.Packages)
+                if (info.reportCurrencePayments != null)
+                    foreach (var payments in info.reportCurrencePayments)
+                    {
+                        docBody.AppendChild(CreateParagraph(new WordParagraph
+                        {
+                            Texts = new List<(string, WordTextProperties)> {
+                        (payments.Date.ToString(), new WordTextProperties { Bold = true, Size = "24", }),
+                        (" " + payments.CurrenceName, new WordTextProperties {Bold = false, Size = "24"}),
+                        (" " + payments.Cost.ToString(), new WordTextProperties {Bold = false, Size = "24"}),
+                         (" " + payments.CreditingId.ToString(), new WordTextProperties { Bold = false, Size = "24" })},
+                            TextProperties = new WordTextProperties
+                            {
+                                Size = "24",
+                                JustificationValues = JustificationValues.Both
+                            }
+                        }));
+                    }
+
+                //var list = info.reportCurrencePayments.GroupBy(purchase => purchase.Date, purchase => purchase.CurrenceName, (name, cost) => new { Key = name, Price = cost, Count = cost.Count() });
+                //var j = 0;
+
+                //foreach (var cosmetic in list)
+                //{
+                //    docBody.AppendChild(CreateParagraph(new WordParagraph
                 //    {
-                //        docBody.AppendChild(CreateParagraph(new WordParagraph
+                //        Texts = new List<(string, WordTextProperties)> { ("Дата: " + cosmetic.Key, new WordTextProperties { Size = "24" }) },
+                //        TextProperties = new WordTextProperties
                 //        {
-                //            Texts = new List<(string, WordTextProperties)> {
-                //        (package.PackageName, new WordTextProperties { Bold = true, Size = "24", }),
-                //        (" " + package.Price, new WordTextProperties {Bold = false, Size = "24"}) },
-                //            TextProperties = new WordTextProperties
-                //            {
-                //                Size = "24",
-                //                JustificationValues = JustificationValues.Both
-                //            }
-                //        }));
+                //            Size = "24",
+                //            JustificationValues = JustificationValues.Both
+                //        }
+                //    }));
+                //    docBody.AppendChild(CreateParagraph(new WordParagraph
+                //    {
+                //        Texts = new List<(string, WordTextProperties)> { ("Стоимость: " + cosmetic.Price.First(), new WordTextProperties { Size = "24" }) },
+                //        TextProperties = new WordTextProperties
+                //        {
+                //            Size = "24",
+                //            JustificationValues = JustificationValues.Both
+                //        }
+                //    }));
+                //    Table table = new Table();
+                //    TableProperties props = new TableProperties(
+                //    new TableBorders(
+                //    new TopBorder
+                //    {
+                //        Val = new EnumValue<BorderValues>(BorderValues.Single),
+                //        Size = 6
+                //    },
+                //    new BottomBorder
+                //    {
+                //        Val = new EnumValue<BorderValues>(BorderValues.Single),
+                //        Size = 6
+                //    },
+                //    new LeftBorder
+                //    {
+                //        Val = new EnumValue<BorderValues>(BorderValues.Single),
+                //        Size = 6
+                //    },
+                //    new RightBorder
+                //    {
+                //        Val = new EnumValue<BorderValues>(BorderValues.Single),
+                //        Size = 6
+                //    },
+                //    new InsideHorizontalBorder
+                //    {
+                //        Val = new EnumValue<BorderValues>(BorderValues.Single),
+                //        Size = 6
+                //    },
+                //    new InsideVerticalBorder
+                //    {
+                //        Val = new EnumValue<BorderValues>(BorderValues.Single),
+                //        Size = 6
+                //    }));
+
+                //    table.AppendChild<TableProperties>(props);
+                //    TableRow tr = new TableRow();
+                //    TableCell tc = new TableCell();
+                //    tc.Append(new Paragraph(new Run(new Text("Дата"))));
+                //    tr.Append(tc);
+                //    tc = new TableCell();
+                //    tc.Append(new Paragraph(new Run(new Text("Количество"))));
+                //    tr.Append(tc);
+                //    tc = new TableCell();
+                //    tc.Append(new Paragraph(new Run(new Text("ID клиента"))));
+                //    tr.Append(tc);
+                //    table.Append(tr);
+
+                //    for (var i = 0; i < cosmetic.Count; i++)
+                //    {
+                //        tr = new TableRow();
+                //        tc = new TableCell();
+                //        //tc.Append(new Paragraph(new Run(new Text(info.Purchases[j].Date.ToString()))));
+                //        //tr.Append(tc);
+                //        //tc = new TableCell();
+                //        //tc.Append(new Paragraph(new Run(new Text(info.Purchases[j].Count.ToString()))));
+                //        //tr.Append(tc);
+                //        //tc = new TableCell();
+                //        //tc.Append(new Paragraph(new Run(new Text(info.Purchases[j].ClientId.ToString()))));
+                //        //tr.Append(tc);
+                //        table.Append(tr);
+                //        j++;
                 //    }
+                //    docBody.Append(table);
+                //}
+              
                 docBody.AppendChild(CreateSectionProperties());
                 wordDocument.MainDocumentPart.Document.Save();
             }

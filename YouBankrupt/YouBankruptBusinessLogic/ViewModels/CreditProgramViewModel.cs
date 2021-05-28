@@ -11,6 +11,8 @@ namespace YouBankruptBusinessLogic.ViewModels
 
         public int? SupplierId { get; set; }
 
+        public int? TranzactionId { get; set; }
+
         [DisplayName("Название кредитной программы")]
         public string CreditProgramName { get; set; }
 

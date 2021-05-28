@@ -40,6 +40,7 @@ namespace YouBankruptDatabaseImplement.Implements
                 var transaction = context.Transactions
                     .Include(rec => rec.Customer)
                     .Include(rec => rec.Crediting)
+                    .Include(rec => rec.CreditProgram)
                     .FirstOrDefault(rec => rec.Id == model.Id);
                 return transaction != null ?
                     new TransactionViewModel
@@ -47,8 +48,9 @@ namespace YouBankruptDatabaseImplement.Implements
                         Id = transaction.Id,
                         CreditingId = transaction.CreditingId,
                         CustomerName = context.Customers.FirstOrDefault(recCustomer => recCustomer.Id == transaction.CustomerId).CustomerFullName,
-                        CreditProgramName = context.CreditPrograms.FirstOrDefault(recCreditProgram => recCreditProgram.Id == model.CreditProgramId).CreditProgramName,
-                        DateFrom = transaction.DateFrom
+                       // CreditProgramName = context.CreditPrograms.FirstOrDefault(recCreditProgram => recCreditProgram.Id == model.CreditProgramId).CreditProgramName,
+                        DateFrom = transaction.DateFrom,
+                        //CreditProgramId = transaction.CreditProgramId
                     } :
                     null;
             }
@@ -77,7 +79,8 @@ namespace YouBankruptDatabaseImplement.Implements
                     CreditingId = rec.CreditingId,
                     CreditProgramName = context.CreditPrograms.FirstOrDefault(recCreditProgram => recCreditProgram.Id == rec.CreditProgramId).CreditProgramName,
                     DateFrom = rec.DateFrom,
-                    DateTo = rec.DateTo
+                    DateTo = rec.DateTo,
+                    CreditProgramId = rec.CreditProgramId
                 }).ToList();
             }
         }
@@ -89,6 +92,7 @@ namespace YouBankruptDatabaseImplement.Implements
                 return context.Transactions
                     .Include(rec => rec.Customer)
                     .Include(rec => rec.Crediting)
+                    .Include(rec => rec.CreditProgram)
                     .Select(rec => new TransactionViewModel
                     {
                         Id = rec.Id,
@@ -96,8 +100,9 @@ namespace YouBankruptDatabaseImplement.Implements
                         CreditProgramName = context.CreditPrograms.FirstOrDefault(recCreditProgram => recCreditProgram.Id == rec.CreditProgramId).CreditProgramName,
                         CreditingId = rec.CreditingId,
                         DateFrom = rec.DateFrom,
-                        DateTo = rec.DateTo
-                    })
+                        DateTo = rec.DateTo,
+                        CreditProgramId = rec.CreditProgramId
+            })
                 .ToList();
             }
         }
@@ -153,6 +158,7 @@ namespace YouBankruptDatabaseImplement.Implements
         {
             transaction.CreditingId = (int)model.CreditingId;
             transaction.CustomerId = (int)model.CustomerId;
+            transaction.CreditProgramId = model.CreditProgramId;
             transaction.CreditProgramId = (int)model.CreditProgramId;
             transaction.DateFrom = (DateTime)model.DateFrom;
             transaction.DateTo = (DateTime)model.DateTo;

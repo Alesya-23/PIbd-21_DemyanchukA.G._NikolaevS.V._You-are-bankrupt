@@ -39,6 +39,9 @@ namespace YouBankruptDatabaseImplements.Migrations
                     b.Property<int?>("SupplierId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("TranzactionId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("SupplierId");
@@ -172,6 +175,10 @@ namespace YouBankruptDatabaseImplements.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("CreditId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
                     b.Property<int?>("CreditingId")
                         .HasColumnType("int");
 
@@ -300,7 +307,9 @@ namespace YouBankruptDatabaseImplements.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreditProgramId");
+                    b.HasIndex("CreditProgramId")
+                        .IsUnique()
+                        .HasFilter("[CreditProgramId] IS NOT NULL");
 
                     b.HasIndex("CreditingId");
 
@@ -383,8 +392,8 @@ namespace YouBankruptDatabaseImplements.Migrations
             modelBuilder.Entity("YouBankruptDatabaseImplements.Models.Transaction", b =>
                 {
                     b.HasOne("YouBankruptDatabaseImplements.Models.CreditProgram", "CreditProgram")
-                        .WithMany()
-                        .HasForeignKey("CreditProgramId");
+                        .WithOne("Transaction")
+                        .HasForeignKey("YouBankruptDatabaseImplements.Models.Transaction", "CreditProgramId");
 
                     b.HasOne("YouBankruptDatabaseImplements.Models.Crediting", "Crediting")
                         .WithMany()

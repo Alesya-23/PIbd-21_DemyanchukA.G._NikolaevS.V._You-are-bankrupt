@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="WindowCreditProgramTranzaction" Height="450" Width="800">
+        Title="WindowCreditProgramTranzaction" Height="450" Width="800" Loaded="WindowBindingReciept_Loaded">
     <Window.Resources>
 
         <Style TargetType="Label">
@@ -54,13 +54,11 @@
         <ComboBox x:Name="ComboBoxTranzaction" Grid.Row="1" Grid.Column="3" SelectedIndex="0" >
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Tranzaction}"/>
+                    <TextBlock Text="{Binding Id}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
         <Button x:Name="ButtonBind" Content="Связать" Grid.Column="1" Click="ButtonBind_Click" RenderTransformOrigin="0.775,0.742" Height="78" Margin="0,124,0,0" Grid.RowSpan="3" VerticalAlignment="Top"/>
-        <DataGrid x:Name="dataGridCreditProgramsTranzactions" Grid.Row="2" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="3" Margin="3"
-                  AutoGeneratingColumn="DataGrid_AutoGeneratingColumn" ColumnWidth="*" IsReadOnly="True" />
     </Grid>
 </Window>
 
